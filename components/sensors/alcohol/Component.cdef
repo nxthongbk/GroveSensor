@@ -1,0 +1,41 @@
+//--------------------------------------------------------------------------------------------------
+/**
+ * Component definition file for the mangOH Yellow Alcohol
+ * sensor interface component.
+ */
+//--------------------------------------------------------------------------------------------------
+cflags:
+{
+    -I$CURDIR/../../fileUtils
+    -I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+    -std=c99
+}
+
+provides:
+{
+    api:
+    {
+        $CURDIR/../../../interfaces/alcohol.api
+    }
+}
+
+requires:
+{
+    api:
+    {
+        dhubIO = io.api
+        modemServices/le_adc.api
+    }
+
+    component:
+    {
+        $LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+    }
+}
+
+
+sources:
+{
+    alcoholSensor.c
+}
+

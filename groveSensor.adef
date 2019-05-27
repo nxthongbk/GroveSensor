@@ -1,0 +1,41 @@
+sandboxed: true
+start: auto
+version: 0.0
+
+extern:
+{
+    gasMQ9   = groveSensor.gasMQ9.gasMQ9
+    alcohol  = groveSensor.alcohol.alcohol
+}
+
+executables:
+{
+    groveSensor = (
+        components/sensors/gasMQ9
+        components/sensors/alcohol
+    )
+}
+
+processes:
+{
+    run:
+    {
+        ( groveSensor )
+    }
+
+    envVars:
+    {
+        LE_LOG_LEVEL = DEBUG
+        LD_LIBRARY_PATH = /legato/systems/current/apps/groveSensor/read-only/usr/lib
+    }
+}
+
+bindings:
+{
+    groveSensor.gasMQ9.le_adc -> modemService.le_adc
+    groveSensor.gasMQ9.dhubIO -> dataHub.io
+    groveSensor.alcohol.le_adc -> modemService.le_adc
+    groveSensor.alcohol.dhubIO -> dataHub.io
+    groveSensor.periodicSensor.dhubIO -> dataHub.io
+}
+
