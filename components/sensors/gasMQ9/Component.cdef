@@ -6,7 +6,6 @@
 //--------------------------------------------------------------------------------------------------
 cflags:
 {
-    -I$CURDIR/../../fileUtils
     -I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
     -std=c99
 }

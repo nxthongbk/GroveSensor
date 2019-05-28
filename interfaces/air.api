@@ -1,0 +1,57 @@
+//--------------------------------------------------------------------------------------------------
+/**
+ * @page c_mangoh_air Air Sensor API
+ *
+ * The following function can be used to fetch air measurement:
+ *
+ * - air_ReadIndustrialPM1_0()
+ * - air_ReadIndustrialPM2_5()
+ * - air_ReadIndustrialPM10()
+ * - air_ReadEnvironmentPM1_0()
+ * - air_ReadEnvironmentPM2_5()
+ * - air_ReadEnvironmentPM10()
+ *
+ * <hr>
+ *
+ * Copyright (C) Sierra Wireless Inc.
+ *
+ * @file gas_interface.h
+ */
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Read the Air Sensor measurement.
+ *
+ * @return LE_OK if successful.
+ */
+//--------------------------------------------------------------------------------------------------
+FUNCTION le_result_t ReadIndustrialPM1_0
+(
+	uint16 value OUT 
+);
+
+FUNCTION le_result_t ReadIndustrialPM2_5
+(
+	uint16 value OUT 
+);
+
+FUNCTION le_result_t ReadIndustrialPM10
+(
+	uint16 value OUT 
+);
+
+FUNCTION le_result_t ReadEnvironmentPM1_0
+(
+	uint16 value OUT 
+);
+
+FUNCTION le_result_t ReadEnvironmentPM2_5
+(
+	uint16 value OUT 
+);
+
+FUNCTION le_result_t ReadEnvironmentPM10
+(
+	uint16 value OUT 
+);
