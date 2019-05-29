@@ -28,6 +28,11 @@
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <stddef.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 
 /* -- i2c.h -- */
@@ -282,6 +287,70 @@ static inline __s32 i2c_smbus_block_process_call(int file, __u8 command,
 			values[i-1] = data.block[i];
 		return data.block[0];
 	}
+}
+
+/** tqkieu, add some functions with I2C bus **/
+static inline int i2cSendByte(const char * i2c_bus,
+			      __u8 address,
+			      __u8 data)
+{
+	int i2c_fd = open(i2c_bus, O_RDWR);
+	if (i2c_fd < 0) {
+		printf("i2cSendByte: failed to open %s", i2c_bus);
+		return -1;
+	}
+	if (ioctl(i2c_fd, I2C_SLAVE_FORCE, address) < 0) {
+		printf("i2cSendByte: could not set address to 0x%02x: %s\n",
+			 address,
+			 strerror(errno));
+		close(i2c_fd);
+		return -1;
+	}
+	i2c_smbus_write_byte(i2c_fd, data);
+	close(i2c_fd);
+	return 0;
+}
+static inline int i2cSendBytes(const char * i2c_bus,
+			       __u8 address,
+			       __u8 *data,
+			       __u8 len)
+{
+	int i2c_fd = open(i2c_bus, O_RDWR);
+	if (i2c_fd < 0) {
+		printf("i2cSendBytes: failed to open %s", i2c_bus);
+		return -1;
+	}
+	if (ioctl(i2c_fd, I2C_SLAVE_FORCE, address) < 0) {
+		printf("i2cSendBytes: could not set address to 0x%02x: %s\n",
+		       address,
+		       strerror(errno));
+		close(i2c_fd);
+		return -1;
+	}
+	i2c_smbus_write_i2c_block_data(i2c_fd, data[0], len-1, data+1);
+	close(i2c_fd);
+	return 0;
+}
+static inline int i2cReceiveBytes(const char * i2c_bus,
+				  __u8 address,
+				  __u8 *data,
+				  __u8 len)
+{
+	int i2c_fd = open(i2c_bus, O_RDWR);
+	if (i2c_fd < 0) {
+		printf("i2cReceiveBytes: failed to open %s", i2c_bus);
+		return -1;
+	}
+	if (ioctl(i2c_fd, I2C_SLAVE_FORCE, address) < 0) {
+		printf("i2cReceiveBytes: could not set address to 0x%02x: %s\n",
+		       address,
+		       strerror(errno));
+		close(i2c_fd);
+		return -1;
+	}
+	i2c_smbus_read_i2c_block_data(i2c_fd, 0, len, data);
+	close(i2c_fd);
+	return 0;
 }
 
 #endif // I2C_UTILS_H

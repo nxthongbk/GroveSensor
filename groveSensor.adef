@@ -6,6 +6,7 @@ extern:
 {
     gasMQ9   = groveSensor.gasMQ9.gasMQ9
     alcohol  = groveSensor.alcohol.alcohol
+    air      = groveSensor.air.air
 }
 
 executables:
@@ -13,6 +14,7 @@ executables:
     groveSensor = (
         components/sensors/gasMQ9
         components/sensors/alcohol
+        components/sensors/air
     )
 }
 
@@ -36,6 +38,14 @@ bindings:
     groveSensor.gasMQ9.dhubIO -> dataHub.io
     groveSensor.alcohol.le_adc -> modemService.le_adc
     groveSensor.alcohol.dhubIO -> dataHub.io
+    groveSensor.air.dhubIO -> dataHub.io
     groveSensor.periodicSensor.dhubIO -> dataHub.io
 }
-
+requires:
+{
+    device:
+    {
+        // replace these devices based on your module
+        [rw]    /dev/i2c-1  /dev/
+    }
+}
