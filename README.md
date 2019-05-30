@@ -28,7 +28,7 @@ Grove - RGB LED Matrix is 64 pixel leds and 255 colors for each pixel
 ## Setup
 1. Insert Grove IoT Expansion card into Mangoh Red
 1. Jump 5V Pin on Grove IoT Card
-1. Connect Grove Alcohol Sensor with A0 connector on Grove card
+1. Connect Grove Sensor to connector on Grove card
 
 
 
