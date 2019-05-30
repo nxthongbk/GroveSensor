@@ -70,7 +70,7 @@ le_result_t air_ReadIndustrialPM1_0(uint16_t *value)
  * Read Air measurement in Industrial Condition
  *
  * @return LE_OK if successful.
- * PM2.5 are particles less than 2.5 µm in diameter.
+ * PM1.0 are particles less than 2.5 µm in diameter.
  * 
  */
 //--------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ le_result_t air_ReadIndustrialPM2_5(uint16_t *value)
  * Read Air measurement in Industrial Condition
  *
  * @return LE_OK if successful.
- * PM10 are particles less than 10 µm in diameter.
+ * PM1.0 are particles less than 10 µm in diameter.
  * 
  */
 //--------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ le_result_t air_ReadEnvironmentPM1_0(uint16_t *value)
  * Read Air measurement in Environment Condition
  *
  * @return LE_OK if successful.
- * PM2.5 are particles less than 2.5 µm in diameter.
+ * PM1.0 are particles less than 2.5 µm in diameter.
  * 
  */
 //--------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ le_result_t air_ReadEnvironmentPM2_5(uint16_t *value)
  * Read Air measurement in Environment Condition
  *
  * @return LE_OK if successful.
- * PM10 are particles less than 10 µm in diameter.
+ * PM1.0 are particles less than 10 µm in diameter.
  * 
  */
 //--------------------------------------------------------------------------------------------------

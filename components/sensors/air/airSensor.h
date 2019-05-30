@@ -3,4 +3,4 @@
 
 LE_SHARED le_result_t mangOH_ReadAirSensor(double *reading);
 
-#endif // ALCOHOL_SENSOR_H
+#endif // AIR_SENSOR_H
