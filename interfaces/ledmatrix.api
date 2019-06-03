@@ -1,8 +1,3 @@
-/**
- * @@Description: lex_matrix API
- * @Author: Kieu Tra <tqkieu@tma.com.vn>
- **/
-
 DEFINE I2C_CMD_CONTINUE_DATA			= 0x81;
 
 DEFINE GROVE_TWO_RGB_LED_MATRIX_DEF_I2C_ADDR	= 0x65; // The device i2c address in default
