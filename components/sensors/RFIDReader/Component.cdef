@@ -1,0 +1,32 @@
+sources:
+{
+	groveRFID.c
+}
+
+cflags:
+{
+	-I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+	-DDEBUG=1
+}
+
+provides:
+{
+	api:
+	{
+		$CURDIR/../../../interfaces/RFIDReader.api
+	}
+}
+
+requires:
+{
+	api:
+	{
+		dhubIO = io.api
+	}
+
+	component:
+	{
+		$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+	}
+
+}

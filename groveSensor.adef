@@ -9,6 +9,7 @@ extern:
     air                 = groveSensor.air.air
     ledmatrix           = groveSensor.ledmatrix.ledmatrix
     speechRecognizer    = groveSensor.speechRecognizer.speechRecognizer
+    thermocouple        = groveSensor.thermocouple.thermocouple
 }
 
 executables:
@@ -19,6 +20,8 @@ executables:
         components/sensors/air
         components/actuators/ledmatrix
         components/sensors/speechRecognizer
+        components/sensors/thermocouple
+        components/sensors/RFIDReader
     )
 }
 
@@ -47,12 +50,22 @@ bindings:
     groveSensor.ledmatrix.io -> dataHub.io
     groveSensor.ledmatrix.admin -> dataHub.admin
     groveSensor.speechRecognizer.dhubIO -> dataHub.io
+    groveSensor.thermocouple.dhubIO -> dataHub.io
+    groveSensor.thermocouple.le_spi -> spiService.le_spi
+    groveSensor.RFIDReader.dhubIO -> dataHub.io
 }
 requires:
 {
     device:
     {
-        // replace these devices based on your module
+#if ${LEGATO_TARGET} = wp85
         [rw]    /dev/i2c-1  /dev/
+        [rw]    /dev/ttyHS0 /dev/
+        [rw]    /dev/spidev0.0  /dev/
+#elif ${LEGATO_TARGET} = wp76xx
+        [rw]    /dev/i2c-4  /dev/
+        [rw]    /dev/ttyHS0 /dev/
+        [rw]    /dev/spidev1.0  /dev/
+#endif
     }
 }
