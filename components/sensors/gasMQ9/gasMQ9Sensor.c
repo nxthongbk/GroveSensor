@@ -41,7 +41,7 @@ le_result_t gasMQ9_Read(double *gas_value)
 
 static void SampleGasMQ9
 (
-    psensor_Ref_t ref, void *context
+    psensor_Ref_t ref
 )
 {
     double sample;
@@ -61,7 +61,8 @@ static void SampleGasMQ9
 
 COMPONENT_INIT
 {
-    psensor_Create("gasmq9", DHUBIO_DATA_TYPE_NUMERIC, "", SampleGasMQ9, NULL);
+    psensor_Create("gasmq9", DHUBIO_DATA_TYPE_NUMERIC, "", SampleGasMQ9);
+
 }
 
 

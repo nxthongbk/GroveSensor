@@ -7,9 +7,9 @@ extern:
     gasMQ9              = groveSensor.gasMQ9.gasMQ9
     alcohol             = groveSensor.alcohol.alcohol
     air                 = groveSensor.air.air
-    ledmatrix           = groveSensor.ledmatrix.ledmatrix
-    speechRecognizer    = groveSensor.speechRecognizer.speechRecognizer
+    speechRecognizer    = groveSensor.speechRecognizer.recognizer
     thermocouple        = groveSensor.thermocouple.thermocouple
+    ledmatrix           = groveSensor.ledmatrix.ledmatrix
 }
 
 executables:
@@ -18,10 +18,10 @@ executables:
         components/sensors/gasMQ9
         components/sensors/alcohol
         components/sensors/air
-        components/actuators/ledmatrix
         components/sensors/speechRecognizer
         components/sensors/thermocouple
         components/sensors/RFIDReader
+        components/actuators/ledmatrix
     )
 }
 

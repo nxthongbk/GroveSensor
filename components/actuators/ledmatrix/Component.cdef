@@ -7,7 +7,7 @@ provides:
 {
     api:
     {
-        ledmatrix.api
+        $CURDIR/../../../interfaces/ledmatrix.api
     }
 }
 requires:

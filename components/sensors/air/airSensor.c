@@ -211,7 +211,7 @@ le_result_t air_ReadEnvironmentPM10(uint16_t *value)
 
 static void SampleAirIndustrialPM1_0
 (
-    psensor_Ref_t ref, void *context
+    psensor_Ref_t ref
 )
 {
     uint16_t sample;
@@ -233,7 +233,7 @@ static void SampleAirIndustrialPM1_0
 
 COMPONENT_INIT
 {
-    psensor_Create("airIndustrialPM1_0", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM1_0, NULL);
+    psensor_Create("airIndustrialPM1_0", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM1_0);
 }
 
 
