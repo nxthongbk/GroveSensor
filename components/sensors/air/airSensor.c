@@ -27,7 +27,7 @@
 #include "i2c-utils.h"
 
 #define AIR_I2C_ADDR        0x40
-char air_sensor_i2c_bus[256] = "/dev/i2c-1";
+char air_sensor_i2c_bus[256] = "/dev/i2c-5";
 
 uint8_t buf[29]={0,};
 size_t buf_len = sizeof(buf);
@@ -211,7 +211,8 @@ le_result_t air_ReadEnvironmentPM10(uint16_t *value)
 
 static void SampleAirIndustrialPM1_0
 (
-    psensor_Ref_t ref
+    psensor_Ref_t ref,
+    void *context
 )
 {
     uint16_t sample;
@@ -233,7 +234,7 @@ static void SampleAirIndustrialPM1_0
 
 COMPONENT_INIT
 {
-    psensor_Create("airIndustrialPM1_0", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM1_0);
+    psensor_Create("airIndustrialPM1_0", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM1_0, NULL);
 }
 
 

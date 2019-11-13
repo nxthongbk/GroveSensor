@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Implementation of the mangOH Red Gas sensor interface.
+ * Implementation of the mangOH Yellow Light sensor interface.
  *
  * Provides the gas API services and plugs into the Legato Data Hub.
  *
@@ -12,35 +12,34 @@
 #include "periodicSensor.h"
 
 
-const char gasMQ9SensorAdc[] = "EXT_ADC0";
-static psensor_Ref_t PeriodicSensorRef;
+const char lightSensorAdc[] = "EXT_ADC0";
 
 //--------------------------------------------------------------------------------------------------
 /**
- * Read Gas measurement
+ * Read Light measurement
  *
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
 
-le_result_t gasMQ9_Read(double *gas_value)
+le_result_t light_Read(double *light_value)
 {
     int32_t valueMv;
     
-    le_result_t r = le_adc_ReadValue(gasMQ9SensorAdc, &valueMv);
+    le_result_t r = le_adc_ReadValue(lightSensorAdc, &valueMv);
 
     if (r != LE_OK)
     {
         return r;
     }
 
-    *gas_value = valueMv/1000.0;
+    *light_value = valueMv/1000.0;
     
     return LE_OK;
 }
 
 
-static void SampleGasMQ9
+static void SampleLight
 (
     psensor_Ref_t ref,
     void *context
@@ -48,7 +47,7 @@ static void SampleGasMQ9
 {
     double sample;
 
-    le_result_t result = gasMQ9_Read(&sample);
+    le_result_t result = light_Read(&sample);
 
     if (result == LE_OK)
     {
@@ -63,7 +62,7 @@ static void SampleGasMQ9
 
 COMPONENT_INIT
 {
-    PeriodicSensorRef = psensor_Create("gasmq9", DHUBIO_DATA_TYPE_NUMERIC, "mV", SampleGasMQ9, NULL);
+    psensor_Create("light", DHUBIO_DATA_TYPE_NUMERIC, "", SampleLight, NULL);
 }
 
 

@@ -4,12 +4,6 @@
  * sensor interface component.
  */
 //--------------------------------------------------------------------------------------------------
-cflags:
-{
-    -I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
-    -std=c99
-}
-
 provides:
 {
     api:
@@ -22,13 +16,13 @@ requires:
 {
     api:
     {
-        dhubIO = io.api
+        dhubIO = $CURDIR/../../../../DataHub/io.api
         modemServices/le_adc.api
     }
 
     component:
     {
-        $LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+        periodicSensor
     }
 }
 
@@ -37,4 +31,3 @@ sources:
 {
     gasMQ9Sensor.c
 }
-

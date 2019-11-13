@@ -162,7 +162,10 @@ void recognizer_getCmd(char* cmd_buffer, size_t cmd_bufferSize)
 	}
 }
 
-void periodicSample(psensor_Ref_t ref)
+void periodicSample(
+	psensor_Ref_t ref,
+	void *context
+	)
 {
 	char cmd[32];
 	recognizer_getCmd(cmd, 31);
@@ -178,7 +181,7 @@ COMPONENT_INIT
 	int serial_fd;	
 	serial_fd = open_uart1("/dev/ttyHS0");
 
-	psensor_Create("recognizer", DHUBIO_DATA_TYPE_STRING, "", periodicSample);
+	psensor_Create("recognizer", DHUBIO_DATA_TYPE_STRING, "", periodicSample, NULL);
 
 	while(1)
 	{

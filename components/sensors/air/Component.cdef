@@ -6,11 +6,9 @@
 //--------------------------------------------------------------------------------------------------
 cflags:
 {
-    -I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
     -I$CURDIR/../../i2c-utils
     -std=c99
 }
-
 provides:
 {
     api:
@@ -28,7 +26,7 @@ requires:
 
     component:
     {
-        $LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+        periodicSensor
         $CURDIR/../../i2c-utils
     }
 }

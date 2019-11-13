@@ -133,10 +133,8 @@ void write_uart(int fd, char *cmd)
 {
 	int     wrote = 0;
 	wrote = write (fd, cmd, strlen (cmd));
-#if defined (DEBUG)
 	LE_INFO("write %s", cmd);
 	LE_INFO("wrote %d", wrote);
-#endif
 }
 
 void signal_handler_IO(int status)
@@ -170,7 +168,10 @@ void RFIDReader_getID(char* cmd_buffer, size_t cmd_bufferSize)
 	}
 }
 
-void periodicSample(psensor_Ref_t ref)
+void periodicSample(
+	psensor_Ref_t ref,
+	void *context
+	)
 {
 	char cmd[64];
 	RFIDReader_getID(cmd, 63);
@@ -186,7 +187,7 @@ COMPONENT_INIT
 	int serial_fd;	
 	serial_fd = open_uart("/dev/ttyHS0");
 
-	psensor_Create("RFID125KHz", DHUBIO_DATA_TYPE_STRING, "", periodicSample);
+	psensor_Create("RFID125KHz", DHUBIO_DATA_TYPE_STRING, "", periodicSample, NULL);
 
 	while(1)
 	{

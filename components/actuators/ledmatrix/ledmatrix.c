@@ -361,7 +361,8 @@ void ledmatrix_displayColorAnimation(uint8_t index,
                      bool forever_flag)
 {
     uint8_t data[6] = {0, };
-    uint8_t from, to;
+    uint8_t from = 0;
+    uint8_t to = 0;
     data[0] = LEDMATRIX_I2C_CMD_DISP_COLOR_ANIMATION;
     switch(index) {
     case 0:

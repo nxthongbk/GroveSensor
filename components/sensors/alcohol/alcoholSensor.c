@@ -41,7 +41,8 @@ le_result_t alcohol_Read(double *alcohol_value)
 
 static void SampleAlcohol
 (
-    psensor_Ref_t ref
+    psensor_Ref_t ref,
+    void *context
 )
 {
     double sample;
@@ -61,7 +62,7 @@ static void SampleAlcohol
 
 COMPONENT_INIT
 {
-    psensor_Create("alcohol", DHUBIO_DATA_TYPE_NUMERIC, "", SampleAlcohol);
+    psensor_Create("alcohol", DHUBIO_DATA_TYPE_NUMERIC, "", SampleAlcohol, NULL);
 }
 
 

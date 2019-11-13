@@ -8,7 +8,7 @@ provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/alcohol.api
+        $CURDIR/../../../interfaces/light.api
     }
 }
 
@@ -29,6 +29,6 @@ requires:
 
 sources:
 {
-    alcoholSensor.c
+    lightSensor.c
 }
 

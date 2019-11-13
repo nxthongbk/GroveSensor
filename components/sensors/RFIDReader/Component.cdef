@@ -3,12 +3,6 @@ sources:
 	groveRFID.c
 }
 
-cflags:
-{
-	-I$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
-	-DDEBUG=1
-}
-
 provides:
 {
 	api:
@@ -26,7 +20,6 @@ requires:
 
 	component:
 	{
-		$LEGATO_ROOT/apps/sample/dataHub/components/periodicSensor
+		periodicSensor
 	}
-
 }

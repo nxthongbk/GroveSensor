@@ -5,7 +5,7 @@ This project demonstrates how to integrate Grove Sensor with sensors, actuators 
 
 ## Prerequisites
 
-* A mangOH Red board.
+* A mangOH Yellow board.
 * A Grove IoT Expansion card.
 * Grove sensors: See detail of sensor on wiki page: http://wiki.seeedstudio.com/ 
 
@@ -42,13 +42,13 @@ Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/
 
 ## Setup
 1. Insert Grove IoT Expansion card into Mangoh Red
-1. Jump 5V Pin on Grove IoT Card
+1. Jump 3.3V Pin on Grove IoT Card
 1. Connect Grove Sensor to connector on Grove card
 
 
 
 ## How To Run
 
-1. Build the AlcoholSensorService app by running ```mkapp -t wp85 groveSensor.adef``` in GroveSensorToCloud directory.
-1. Run ```instapp groveSensor.wp85.update 192.168.2.2``` to install the app.
+1. Build the AlcoholSensorService app by running ```mkapp -t wp77xx groveSensor.adef``` in GroveSensorToCloud directory.
+1. Run ```instapp groveSensor.wp77.update 192.168.2.2``` to install the app.
 
