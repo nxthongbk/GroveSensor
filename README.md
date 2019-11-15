@@ -12,26 +12,26 @@ This project demonstrates how to integrate Grove sensors, actuators with MangoH 
 ### Grove Alcohol Sensor
 ------------------
 Grove - Alcohol Sensor is built with MQ303A semiconductor alcohol sensor. It has good sensitivity and fast response to alcohol. It is suitable for making Breathalyzer. This Grove implements all the necessary circuitry for MQ303A like power conditioning and heater power supply. This sensor outputs a voltage inversely proportional to the alcohol concentration in air.  
-To integrate with Alcohol Sensor (HM3301) we need connect to port A0 in Grove Expansion Card.  
+To integrate with Alcohol Sensor (HM3301) we need connect to port A0 in Grove IoT Expansion Card.  
 Detail in: http://wiki.seeedstudio.com/Grove-Alcohol_Sensor/  
 
 ### The Grove - Laser PM2.5
 ------------------
 The Grove - Laser PM2.5 Sensor (HM3301) is a new generation of laser dust detection sensor, which is used for continuous and real-time detection of dust in the air. 
 
-To integrate with Laser PM2.5 Sensor (HM3301) we need connect to port A0 in Grove Expansion Card.  
+To integrate with Laser PM2.5 Sensor (HM3301) we need connect to port A0 in Grove IoT Expansion Card.  
 Detail in: http://wiki.seeedstudio.com/Grove-Laser_PM2.5_Sensor-HM3301/  
 
 ### Grove - Gas Sensor(MQ9)
 ------------------
 The Grove - Gas Sensor(MQ9) module is useful for gas leakage detection (in home and industry). It is suitable for detecting LPG, CO, CH4 
-To integrate with Gas Sensor (HM3301) we need connect to port I2C in Grove Expansion Card.
+To integrate with Gas Sensor (HM3301) we need connect to port I2C in Grove IoT Expansion Card.
 Detail in: http://wiki.seeedstudio.com/Grove-Gas_Sensor-MQ9/  
 
 ### Grove - RGB LED Matrix w/Driver
 ------------------
 Grove - RGB LED Matrix is 64 pixel leds and 255 colors for each pixel  
-To integrate with RGB LED Matrix) we need connect to port I2C in Grove Expansion Card. 
+To integrate with RGB LED Matrix) we need connect to port I2C in Grove IoT Expansion Card. 
 Detail in: http://wiki.seeedstudio.com/Grove-RGB_LED_Matrix_w-Driver/  
 
 ### Grove - Speech Recognizer  
