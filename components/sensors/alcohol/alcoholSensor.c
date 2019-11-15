@@ -10,7 +10,7 @@
 #include "legato.h"
 #include "interfaces.h"
 #include "periodicSensor.h"
-
+#include "alcoholSensor.h"
 
 const char alcoholSensorAdc[] = "EXT_ADC0";
 
@@ -32,6 +32,7 @@ le_result_t alcohol_Read(double *alcohol_value)
     {
         return r;
     }
+    LE_INFO("alcoholSensorAdc%d", valueMv);
 
     *alcohol_value = valueMv/1000.0;
     

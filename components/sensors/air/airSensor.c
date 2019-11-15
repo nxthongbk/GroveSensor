@@ -24,6 +24,7 @@
 #include "legato.h"
 #include "interfaces.h"
 #include "periodicSensor.h"
+#include "airSensor.h"
 #include "i2c-utils.h"
 
 #define AIR_I2C_ADDR        0x40

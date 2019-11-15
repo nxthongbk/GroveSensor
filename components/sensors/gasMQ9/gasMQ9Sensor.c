@@ -10,7 +10,7 @@
 #include "legato.h"
 #include "interfaces.h"
 #include "periodicSensor.h"
-
+#include "gasMQ9Sensor.h"
 
 const char gasMQ9SensorAdc[] = "EXT_ADC0";
 static psensor_Ref_t PeriodicSensorRef;

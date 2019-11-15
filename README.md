@@ -38,12 +38,13 @@ Detail in: http://wiki.seeedstudio.com/Grove-RGB_LED_Matrix_w-Driver/
 ------------------
 Grove speech recognizer is a designed for voice control application such as smart home, smart toy, voice control robot, anything you would like to control through voice, it worth a try. The board includes a Nuvoton ISD9160, a microphone, 1 SPI flash, 1 grove connector,1 speaker connector and 1 led to reflect to your voice.  
 To integrate with Speech Recognizer we need connect to port I2C in Grove Expansion Card. 
-Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/
+Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/ 
 
 ### Grove - Grove-125KHz RFID Reader   
 ------------------
 Grove-125KHz RFID Reader is a  module used to read uem4100 RFID card information with two output formats: Uart and Wiegand. It has a sensitivity with maximum 7cm sensing distance.  
-Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/  
+Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/ 
+
 
 ## Setup
 1. Insert Grove IoT Expansion card into Mangoh Red

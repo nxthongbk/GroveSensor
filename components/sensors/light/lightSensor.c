@@ -10,7 +10,7 @@
 #include "legato.h"
 #include "interfaces.h"
 #include "periodicSensor.h"
-
+#include "lightSensor.h"
 
 const char lightSensorAdc[] = "EXT_ADC0";
 

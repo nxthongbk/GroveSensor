@@ -5,12 +5,14 @@ version: 0.0
 extern:
 {
     gasMQ9              = groveSensor.gasMQ9.gasMQ9
-    alcohol             = groveSensor.alcohol.alcohol
-    air                 = groveSensor.air.air
-    speechRecognizer    = groveSensor.speechRecognizer.recognizer
+    //alcohol             = groveSensor.alcohol.alcohol
+    //air                 = groveSensor.air.air
+    //speechRecognizer    = groveSensor.speechRecognizer.recognizer
     ledmatrix           = groveSensor.ledmatrix.ledmatrix
-    light               = groveSensor.light.light
-    RFIDReader          = groveSensor.RFIDReader.RFIDReader
+    //light               = groveSensor.light.light
+    //RFIDReader          = groveSensor.RFIDReader.RFIDReader
+    //ultraSonic          = groveSensor.ultraSonic.ultraSonic
+
 }
 
 
@@ -18,12 +20,13 @@ executables:
 {
     groveSensor = (
         components/sensors/gasMQ9
-        components/sensors/alcohol
-        components/sensors/air
-        components/sensors/speechRecognizer
-        components/sensors/RFIDReader
+        //components/sensors/alcohol
+        //components/sensors/air
+        //components/sensors/speechRecognizer
+        //components/sensors/RFIDReader
         components/actuators/ledmatrix
-        components/sensors/light
+        //components/sensors/light
+        //components/sensors/ultraSonic
     )
 }
 
@@ -46,32 +49,23 @@ bindings:
     groveSensor.periodicSensor.dhubIO -> dataHub.io
     groveSensor.gasMQ9.le_adc -> modemService.le_adc
     groveSensor.gasMQ9.dhubIO -> dataHub.io
-    groveSensor.alcohol.le_adc -> modemService.le_adc
-    groveSensor.alcohol.dhubIO -> dataHub.io
-    groveSensor.air.dhubIO -> dataHub.io
+    //groveSensor.alcohol.le_adc -> modemService.le_adc
+    //groveSensor.alcohol.dhubIO -> dataHub.io
+    //groveSensor.air.dhubIO -> dataHub.io
     groveSensor.ledmatrix.io -> dataHub.io
     groveSensor.ledmatrix.admin -> dataHub.admin
-    groveSensor.speechRecognizer.dhubIO -> dataHub.io
-    groveSensor.RFIDReader.dhubIO -> dataHub.io
-    groveSensor.light.dhubIO -> dataHub.io
-    groveSensor.light.le_adc -> modemService.le_adc
+    //groveSensor.speechRecognizer.dhubIO -> dataHub.io
+    //groveSensor.RFIDReader.dhubIO -> dataHub.io
+    //groveSensor.light.dhubIO -> dataHub.io
+    //groveSensor.light.le_adc -> modemService.le_adc
+    //groveSensor.ultraSonic.dhubIO -> dataHub.io
+    //groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
 }
 requires:
 {
     device:
     {
-#if ${LEGATO_TARGET} = wp85
-        [rw]    /dev/i2c-1  /dev/
-        [rw]    /dev/ttyHS0 /dev/
-        [rw]    /dev/spidev0.0  /dev/
-#elif ${LEGATO_TARGET} = wp76xx
-        [rw]    /dev/i2c-4  /dev/
-        [rw]    /dev/ttyHS0 /dev/
-        [rw]    /dev/spidev1.0  /dev/
-#elif ${LEGATO_TARGET} = wp77xx
+        // replace these devices based on your module
         [rw]    /dev/i2c-5  /dev/
-        [rw]    /dev/ttyHS0 /dev/
-        [rw]    /dev/spidev1.0  /dev/
-#endif
     }
 }

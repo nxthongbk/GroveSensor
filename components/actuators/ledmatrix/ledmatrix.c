@@ -26,7 +26,7 @@ uint8_t baseAddress;
 uint32_t deviceId[3]; // Unique device ID(96 bits: Low, Middle, High)
 
 
-const char *led_matrix_i2c_bus = "/dev/i2c-1";
+const char *led_matrix_i2c_bus = "/dev/i2c-5";
 
 
 void i2cSendContinueBytes(uint8_t address, uint8_t *data, uint8_t len)
