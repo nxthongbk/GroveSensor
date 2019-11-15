@@ -6,12 +6,12 @@ extern:
 {
     //gasMQ9              = groveSensor.gasMQ9.gasMQ9
     //alcohol             = groveSensor.alcohol.alcohol
-    air                 = groveSensor.air.air
+    //air                 = groveSensor.air.air
     //speechRecognizer    = groveSensor.speechRecognizer.recognizer
     //ledmatrix           = groveSensor.ledmatrix.ledmatrix
     //light               = groveSensor.light.light
     //RFIDReader          = groveSensor.RFIDReader.RFIDReader
-    //ultraSonic          = groveSensor.ultraSonic.ultraSonic
+    ultraSonic          = groveSensor.ultraSonic.ultraSonic
 
 }
 
@@ -21,12 +21,12 @@ executables:
     groveSensor = (
         //components/sensors/gasMQ9
         //components/sensors/alcohol
-        components/sensors/air
+        //components/sensors/air
         //components/sensors/speechRecognizer
         //components/sensors/RFIDReader
         //components/actuators/ledmatrix
         //components/sensors/light
-        //components/sensors/ultraSonic
+        components/sensors/ultraSonic
     )
 }
 
@@ -51,15 +51,15 @@ bindings:
     //groveSensor.gasMQ9.dhubIO -> dataHub.io
     //groveSensor.alcohol.le_adc -> modemService.le_adc
     //groveSensor.alcohol.dhubIO -> dataHub.io
-    groveSensor.air.dhubIO -> dataHub.io
+    //groveSensor.air.dhubIO -> dataHub.io
     //groveSensor.ledmatrix.io -> dataHub.io
     //groveSensor.ledmatrix.admin -> dataHub.admin
     //groveSensor.speechRecognizer.dhubIO -> dataHub.io
     //groveSensor.RFIDReader.dhubIO -> dataHub.io
     //groveSensor.light.dhubIO -> dataHub.io
     //groveSensor.light.le_adc -> modemService.le_adc
-    //groveSensor.ultraSonic.dhubIO -> dataHub.io
-    //groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
+    groveSensor.ultraSonic.dhubIO -> dataHub.io
+    groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
 }
 requires:
 {

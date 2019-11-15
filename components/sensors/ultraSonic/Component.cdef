@@ -10,7 +10,7 @@ requires:
 {
     api:
     {
-        dhubIO = io.api
+        dhubIO = $CURDIR/../../../../DataHub/io.api
         le_gpioPin8 = le_gpio.api
     }
 
