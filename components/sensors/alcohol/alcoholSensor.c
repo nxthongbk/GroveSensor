@@ -22,19 +22,27 @@ const char alcoholSensorAdc[] = "EXT_ADC0";
  */
 //--------------------------------------------------------------------------------------------------
 
-le_result_t alcohol_Read(double *alcohol_value)
+le_result_t alcohol_Read(double *alcoholRs)
 {
-    int32_t valueMv;
+    int32_t adcValue;
+    double sensorVolt;
+    double RS; //Sensing Resistance: resistance of the sensor reduce when gas concentration increases 
     
-    le_result_t r = le_adc_ReadValue(alcoholSensorAdc, &valueMv);
+    le_result_t r = le_adc_ReadValue(alcoholSensorAdc, &adcValue);
 
     if (r != LE_OK)
     {
         return r;
     }
-    LE_INFO("alcoholSensorAdc%d", valueMv);
 
-    *alcohol_value = valueMv/1000.0;
+    //Convert adc value to voltage
+    sensorVolt = adcValue/1024*5.0;
+
+    //Get Sensing Resistance value 
+    //Rs is a dimensionless ratio that is useful for calculating the sensed alcohol concentration
+    RS = sensorVolt/(5.0 - sensorVolt);
+
+    *alcoholRs = RS;
     
     return LE_OK;
 }

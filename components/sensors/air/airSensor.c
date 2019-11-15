@@ -30,7 +30,7 @@
 #define AIR_I2C_ADDR        0x40
 char air_sensor_i2c_bus[256] = "/dev/i2c-5";
 
-uint8_t buf[29]={0,};
+uint8_t buf[29] = {0,};
 size_t buf_len = sizeof(buf);
 
 //--------------------------------------------------------------------------------------------------
@@ -47,21 +47,22 @@ le_result_t air_ReadIndustrialPM1_0(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 2;
+    LE_INFO("Start Reading Sensor");
 
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
 
     if (res != 0)
         return LE_FAULT;
+
     if (buf_len != 29)
         return LE_FAULT;
+
     if (NULL == buf)
         return LE_FAULT;
-    for (int i = 1; i < 8; i++)
-    {
-        if (i == 2) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
-        }
-    }
+
+    *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
+        
     sleep(5);
     return LE_OK;
 }
@@ -80,6 +81,8 @@ le_result_t air_ReadIndustrialPM2_5(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 3;
+
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
     if (res != 0)
         return LE_FAULT;
@@ -88,7 +91,7 @@ le_result_t air_ReadIndustrialPM2_5(uint16_t *value)
     for (int i = 1; i < 8; i++)
     {
         if (i == 3) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
+            *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
         }
     }
     sleep(5);
@@ -110,17 +113,16 @@ le_result_t air_ReadIndustrialPM10(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 4;
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
     if (res != 0)
         return LE_FAULT;
     if (NULL == buf)
         return LE_FAULT;
-    for (int i = 1; i < 8; i++)
-    {
-        if (i == 4) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
-        }
-    }
+
+
+    *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
+
     sleep(5);
     return LE_OK;
 }
@@ -140,17 +142,16 @@ le_result_t air_ReadEnvironmentPM1_0(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 5;
+
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
     if (res != 0)
         return LE_FAULT;
     if (NULL == buf)
         return LE_FAULT;
-    for (int i = 1; i < 8; i++)
-    {
-        if (i == 5) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
-        }
-    }
+
+    *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
+
     sleep(5);
     return LE_OK;
 }
@@ -168,16 +169,16 @@ le_result_t air_ReadEnvironmentPM2_5(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 6;
+
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
     if (res != 0)
         return LE_FAULT;
     if (NULL == buf)
         return LE_FAULT;
-    for (int i = 1; i < 8; i++) {
-        if (i == 6) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
-        }
-    }
+
+    *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
+
     sleep(5);
     return LE_OK;
 }
@@ -196,16 +197,16 @@ le_result_t air_ReadEnvironmentPM10(uint16_t *value)
 {
     *value = 0;
     int res = 0;
+    int pmBufNum = 7;
+
     res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
     if (res != 0)
         return LE_FAULT;
     if (NULL == buf)
         return LE_FAULT;
-    for (int i = 1; i < 8; i++) {
-        if (i == 7) {
-            *value = (uint16_t)buf[i*2]<<8|(buf[i*2+1]);
-        }
-    }
+
+    *value = (uint16_t)buf[pmBufNum*2]<<8|(buf[pmBufNum*2+1]);
+
     sleep(5);
     return LE_OK;
 }
@@ -230,7 +231,7 @@ static void SampleAirIndustrialPM1_0
     }
 }
 
-//Need to add for another type of Air Quality Sensor
+//Need to update for PM2.5, PM10
 
 
 COMPONENT_INIT
