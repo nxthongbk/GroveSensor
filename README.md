@@ -1,6 +1,6 @@
-# Integrate Grove Sensors, Actuators with MangoH and Grove IoT Expansion Card
+# Integrate Grove sensors, actuators with MangoH and Grove IoT Expansion Card
 
-This project demonstrates how to integrate Grove Sensor with sensors, actuators MangoH and Grove IoT Exapansion Card.
+This project demonstrates how to integrate Grove sensors, actuators with MangoH Yellow and Grove IoT Expansion Card.
 
 
 ## Prerequisites
