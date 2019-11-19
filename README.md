@@ -67,6 +67,6 @@ Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
 
 ## How To Run
 
-1. Copy ```GroveSensorToCloudgit a``` app to mangOH/apps.
+1. Copy ```GroveSensorToCloud``` app to mangOH/apps.
 1. Add line ```$CURDIR/apps/GroveSensorToCloud/groveSensor``` to yellow.sdef.
 1. Make yellow.sdef.
