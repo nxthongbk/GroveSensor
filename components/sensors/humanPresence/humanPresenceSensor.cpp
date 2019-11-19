@@ -27,40 +27,11 @@ le_result_t setupSensor(){
     return LE_OK;
 }
 
-
-// le_result_t humanPresence_ReadDerivativeOfIR1(double *value)
-// {
-//     *value = detector.getDerivativeOfIR1();
-//     return LE_OK;
-// }
-
 le_result_t humanPresence_ReadPresentField1(double *value)
 {
-
     *value = detector.presentField1();
     return LE_OK;
 }
-
-// static void SampleDerivativeOfIR1(
-//     psensor_Ref_t ref,
-//     void *context
-// )
-// {
-//     detector.loop();
-
-//     double sample;
-
-//     le_result_t result = humanPresence_ReadDerivativeOfIR1(&sample);
-
-//     if (result == LE_OK)
-//     {
-//         psensor_PushNumeric(ref, 0 /* now */, sample);
-//     }
-//     else
-//     {
-//         LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
-//     }
-// }
 
 static void SamplePresentField1(
     psensor_Ref_t ref,
@@ -83,17 +54,98 @@ static void SamplePresentField1(
     }
 }
 
+le_result_t humanPresence_ReadPresentField2(double *value)
+{
+    *value = detector.presentField2();
+    return LE_OK;
+}
 
+static void SamplePresentField2(
+    psensor_Ref_t ref,
+    void *context
+)
+{
+    detector.loop();
+
+    double sample;
+
+    le_result_t result = humanPresence_ReadPresentField2(&sample);
+
+    if (result == LE_OK)
+    {
+        psensor_PushNumeric(ref, 0 /* now */, sample);
+    }
+    else
+    {
+        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
+    }
+}
+
+le_result_t humanPresence_ReadPresentField3(double *value)
+{
+    *value = detector.presentField3();
+    return LE_OK;
+}
+
+static void SamplePresentField3(
+    psensor_Ref_t ref,
+    void *context
+)
+{
+    detector.loop();
+
+    double sample;
+
+    le_result_t result = humanPresence_ReadPresentField3(&sample);
+
+    if (result == LE_OK)
+    {
+        psensor_PushNumeric(ref, 0 /* now */, sample);
+    }
+    else
+    {
+        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
+    }
+}
+
+le_result_t humanPresence_ReadPresentField4(double *value)
+{
+    *value = detector.presentField4();
+    return LE_OK;
+}
+
+static void SamplePresentField4(
+    psensor_Ref_t ref,
+    void *context
+)
+{
+    detector.loop();
+
+    double sample;
+
+    le_result_t result = humanPresence_ReadPresentField4(&sample);
+
+    if (result == LE_OK)
+    {
+        psensor_PushNumeric(ref, 0 /* now */, sample);
+    }
+    else
+    {
+        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
+    }
+}
 
 COMPONENT_INIT
 {
-    LE_INFO("AK9753 Sensor started!!!");
+    LE_INFO("AK9753 sensor started!!!");
 
     if(setupSensor() != LE_OK){
         LE_INFO("Device not found. Check wiring.");
     }
     else{
-      // psensor_Create("humanDerivativeIR1", DHUBIO_DATA_TYPE_NUMERIC, "", SampleDerivativeOfIR1, NULL);
        psensor_Create("human_present_field1", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField1, NULL);
+       psensor_Create("human_present_field2", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField2, NULL);
+       psensor_Create("human_present_field3", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField3, NULL);
+       psensor_Create("human_present_field4", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField4, NULL);
     }
 }
