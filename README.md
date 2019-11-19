@@ -48,13 +48,13 @@ Detail in: http://wiki.seeedstudio.com/Grove-Speech_Recognizer/
 
 ### Grove - Ultrasonic Ranger
 ------------------
-Grove - Ultrasonic Ranger is a non-contact distance measurement module which works at 40KHz. When we provide a pulse trigger signal with more than 10uS through singal pin, the Grove_Ultrasonic_Ranger will issue 8 cycles of 40kHz cycle level and detect the echo. The pulse width of the echo signal is proportional to the measured distance. Here is the formula: Distance = echo signal high time * Sound speed (340M/S)/2. Grove_Ultrasonic_Ranger's trig and echo singal share 1 SIG pin.
+Grove - Ultrasonic Ranger is a non-contact distance measurement module which works at 40KHz. When we provide a pulse trigger signal with more than 10uS through singal pin, the Grove_Ultrasonic_Ranger will issue 8 cycles of 40kHz cycle level and detect the echo. The pulse width of the echo signal is proportional to the measured distance. Here is the formula: Distance = echo signal high time * Sound speed (340M/S)/2. Grove_Ultrasonic_Ranger's trig and echo singal share 1 SIG pin.   
 To integrate with Speech Recognizer we need connect to port D5 on Grove Expansion Card.   
 Detail in: http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/ 
 
 ### Grove - Human Presence Sensor (AK9753)
 ------------------
-Grove - Ultrasonic Ranger isThe Grove - Human Presence Sensor can be used to detect the presence of the human body or any other infrared objects. Moreover, it is composed of four quantum IR sensors and an integrated circuit (IC) for characteristic compensation, so it can be used to detect the motion of the IR object and the relative position where the IR object moves. An integral analog-to-digital converter provides 16-bits data outputs. This module is suitable for several feet human detector..
+Grove - Ultrasonic Ranger isThe Grove - Human Presence Sensor can be used to detect the presence of the human body or any other infrared objects. Moreover, it is composed of four quantum IR sensors and an integrated circuit (IC) for characteristic compensation, so it can be used to detect the motion of the IR object and the relative position where the IR object moves. An integral analog-to-digital converter provides 16-bits data outputs. This module is suitable for several feet human detector.   
 To integrate with Human Presence Sensor we need connect to port I2C on Grove Expansion Card.   
 Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
 
