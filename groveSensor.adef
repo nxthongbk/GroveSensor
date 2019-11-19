@@ -11,14 +11,17 @@ extern:
     //ledmatrix           = groveSensor.ledmatrix.ledmatrix
     //light               = groveSensor.light.light
     //RFIDReader          = groveSensor.RFIDReader.RFIDReader
-    ultraSonic          = groveSensor.ultraSonic.ultraSonic
-
+    //ultraSonic          = groveSensor.ultraSonic.ultraSonic
+    //pirMotion          = groveSensor.pirMotion.pirMotion
+    //i2cUtils             = groveSensor.i2cUtils.i2cUtils
+    humanPresence         = groveSensor.humanPresence.humanPresence
 }
 
 
 executables:
 {
     groveSensor = (
+        //components/i2cUtils/i2cUtils
         //components/sensors/gasMQ9
         //components/sensors/alcohol
         //components/sensors/air
@@ -26,7 +29,9 @@ executables:
         //components/sensors/RFIDReader
         //components/actuators/ledmatrix
         //components/sensors/light
-        components/sensors/ultraSonic
+        //components/sensors/ultraSonic
+        //components/sensors/pirMotion
+        components/sensors/humanPresence
     )
 }
 
@@ -58,8 +63,11 @@ bindings:
     //groveSensor.RFIDReader.dhubIO -> dataHub.io
     //groveSensor.light.dhubIO -> dataHub.io
     //groveSensor.light.le_adc -> modemService.le_adc
-    groveSensor.ultraSonic.dhubIO -> dataHub.io
-    groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
+    //groveSensor.ultraSonic.dhubIO -> dataHub.io
+    //groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
+    //groveSensor.pirMotion.dhubIO -> dataHub.io
+    //groveSensor.pirMotion.le_gpioPin8 -> gpioService.le_gpioPin8
+    groveSensor.humanPresence.dhubIO -> dataHub.io
 }
 requires:
 {

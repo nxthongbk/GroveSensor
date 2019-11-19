@@ -5,11 +5,16 @@
  * sensor interface component.
  */
 //--------------------------------------------------------------------------------------------------
+cxxflags:
+{
+    -std=c++0x
+    -I $CURDIR/../../i2c-utils
+}
 provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/light.api
+        $CURDIR/../../../interfaces/digitalLight.api
     }
 }
 
@@ -30,6 +35,7 @@ requires:
 
 sources:
 {
-    lightSensor.c
+    digitalLightSensor.c
+    Digital_Light_TSL2561.cpp
 }
 

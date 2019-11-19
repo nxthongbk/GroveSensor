@@ -3,6 +3,11 @@
  * Component definition file for the i2c utilities component.
  */
 //--------------------------------------------------------------------------------------------------
+cxxflags:
+{
+    -std=c++0x
+    -I $CURDIR/../../i2cUtils
+}
 
 sources:
 {

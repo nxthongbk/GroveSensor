@@ -1,7 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow Analog light Sensor
- * http://wiki.seeedstudio.com/Grove-Light_Sensor/
+ * Component definition file for the mangOH Yellow Alcohol
  * sensor interface component.
  */
 //--------------------------------------------------------------------------------------------------
@@ -9,7 +8,7 @@ provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/light.api
+        $CURDIR/../../../interfaces/pirMotion.api
     }
 }
 
@@ -17,8 +16,8 @@ requires:
 {
     api:
     {
-        dhubIO = io.api
-        modemServices/le_adc.api
+        dhubIO = $CURDIR/../../../../DataHub/io.api
+        le_gpioPin8 = le_gpio.api
     }
 
     component:
@@ -30,6 +29,6 @@ requires:
 
 sources:
 {
-    lightSensor.c
+    pirMotionSensor.c
 }
 

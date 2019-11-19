@@ -1,15 +1,20 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow Analog light Sensor
- * http://wiki.seeedstudio.com/Grove-Light_Sensor/
+ * Component definition file for the mangOH Yellow HumanPresence
  * sensor interface component.
  */
 //--------------------------------------------------------------------------------------------------
+cxxflags:
+{
+    -std=c++0x
+    -I $CURDIR/../../i2cUtils
+}
+
 provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/light.api
+        $CURDIR/../../../interfaces/humanPresence.api
     }
 }
 
@@ -17,19 +22,18 @@ requires:
 {
     api:
     {
-        dhubIO = io.api
-        modemServices/le_adc.api
+        dhubIO = $CURDIR/../../../../DataHub/io.api
     }
 
     component:
     {
         periodicSensor
+        $CURDIR/../../i2cUtils
     }
 }
 
-
 sources:
 {
-    lightSensor.c
+    humanPresenceSensor.cpp
+    AK9753.cpp
 }
-

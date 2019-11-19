@@ -51,6 +51,12 @@ Grove - Ultrasonic Ranger is a non-contact distance measurement module which wor
 To integrate with Speech Recognizer we need connect to port D5 on Grove Expansion Card. 
 Detail in: http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/ 
 
+### Grove - Human Presence Sensor (AK9753)
+------------------
+Grove - Ultrasonic Ranger isThe Grove - Human Presence Sensor can be used to detect the presence of the human body or any other infrared objects. Moreover, it is composed of four quantum IR sensors and an integrated circuit (IC) for characteristic compensation, so it can be used to detect the motion of the IR object and the relative position where the IR object moves. An integral analog-to-digital converter provides 16-bits data outputs. This module is suitable for several feet human detector..
+To integrate with Human Presence Sensor we need connect to port I2C on Grove Expansion Card. 
+Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
+
 
 ## Setup
 1. Insert Grove IoT Expansion card into Mangoh Red
@@ -61,6 +67,6 @@ Detail in: http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/
 
 ## How To Run
 
-1. Build the AlcoholSensorService app by running ```mkapp -t wp77xx groveSensor.adef``` in GroveSensorToCloud directory.
-1. Run ```instapp groveSensor.wp77.update 192.168.2.2``` to install the app.
-
+1. Copy ```GroveSensorToCloud``` app to mangOH/apps.
+1. Add line ``$CURDIR/apps/GroveSensorToCloud/groveSensor``` to yellow.sdef.
+1. Make yellow.sdef.
