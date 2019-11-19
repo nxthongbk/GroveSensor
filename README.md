@@ -61,11 +61,12 @@ Detail in: http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/
 ### Grove - Human Presence Sensor (AK9753)
 ------------------
 Grove - Ultrasonic Ranger isThe Grove - Human Presence Sensor can be used to detect the presence of the human body or any other infrared objects. Moreover, it is composed of four quantum IR sensors and an integrated circuit (IC) for characteristic compensation, so it can be used to detect the motion of the IR object and the relative position where the IR object moves. An integral analog-to-digital converter provides 16-bits data outputs. This module is suitable for several feet human detector.   
-
-<img src="https://user-images.githubusercontent.com/17214533/69137311-18ef0300-0aef-11ea-9fa0-9b3f85656d66.png" width="350" alt="accessibility text"> 
-Threre are 4 field to detect human presence. In the output, O means no detection, 1 means detected.
-
 To integrate with Human Presence Sensor we need connect to port I2C on Grove Expansion Card.   
+
+<img src="https://user-images.githubusercontent.com/17214533/69137311-18ef0300-0aef-11ea-9fa0-9b3f85656d66.png" width="500" alt="accessibility text"> 
+Threre are 4 fields to detect human presence. In the output, 0 means no detection, 1 means detected.
+
+
 Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
 
 
