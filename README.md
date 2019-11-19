@@ -1,6 +1,6 @@
 # Integrate Grove sensors, actuators with MangoH and Grove IoT Expansion Card
 
-This project demonstrates how to integrate Grove sensors, actuators with MangoH Yellow and Grove IoT Expansion Card.
+This project demonstrates how to integrate Grove sensors, actuators with mangoH Yellow and Grove IoT Expansion Card.
 
 
 ## Prerequisites
@@ -31,7 +31,7 @@ Detail in: http://wiki.seeedstudio.com/Grove-Gas_Sensor-MQ9/
 ### Grove - RGB LED Matrix w/Driver
 ------------------
 Grove - RGB LED Matrix is 64 pixel leds and 255 colors for each pixel  
-To integrate with RGB LED Matrix) we need connect to port I2C on Grove IoT Expansion Card.   
+To integrate we need connect RGB LED Matrix with I2C Port on Grove IoT Expansion Card.   
 Detail in: http://wiki.seeedstudio.com/Grove-RGB_LED_Matrix_w-Driver/  
 
 ### Grove - Speech Recognizer  
