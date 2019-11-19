@@ -25,7 +25,7 @@
 #include "interfaces.h"
 #include "periodicSensor.h"
 #include "airSensor.h"
-#include "i2c-utils.h"
+#include "i2cUtils.h"
 
 #define AIR_I2C_ADDR        0x40
 char air_sensor_i2c_bus[256] = "/dev/i2c-5";
@@ -231,12 +231,52 @@ static void SampleAirIndustrialPM1_0
     }
 }
 
-//Need to update for PM2.5, PM10
+static void SampleAirIndustrialPM2_5
+(
+    psensor_Ref_t ref,
+    void *context
+)
+{
+    uint16_t sample;
+
+    le_result_t result = air_ReadIndustrialPM2_5(&sample);
+
+    if (result == LE_OK)
+    {
+        psensor_PushNumeric(ref, 0 /* now */, sample);
+    }
+    else
+    {
+        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
+    }
+}
+
+static void SampleAirIndustrialPM10
+(
+    psensor_Ref_t ref,
+    void *context
+)
+{
+    uint16_t sample;
+
+    le_result_t result = air_ReadIndustrialPM10(&sample);
+
+    if (result == LE_OK)
+    {
+        psensor_PushNumeric(ref, 0 /* now */, sample);
+    }
+    else
+    {
+        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
+    }
+}
 
 
 COMPONENT_INIT
 {
     psensor_Create("airIndustrialPM1_0", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM1_0, NULL);
+    psensor_Create("airIndustrialPM2_5", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM2_5, NULL);
+    psensor_Create("airIndustrialPM10", DHUBIO_DATA_TYPE_NUMERIC, "ug/m3", SampleAirIndustrialPM10, NULL);
 }
 
 

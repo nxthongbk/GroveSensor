@@ -6,7 +6,7 @@
 //--------------------------------------------------------------------------------------------------
 cflags:
 {
-    -I$CURDIR/../../i2c-utils
+    -I$CURDIR/../../i2cUtils
     -std=c99
 }
 provides:
@@ -27,7 +27,7 @@ requires:
     component:
     {
         periodicSensor
-        $CURDIR/../../i2c-utils
+        $CURDIR/../../i2cUtils
     }
 }
 

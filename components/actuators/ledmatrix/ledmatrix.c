@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "i2c-utils.h"
+#include "i2cUtils.h"
 #include "legato.h"
 #include "interfaces.h"
 #include "le_mutex.h"
