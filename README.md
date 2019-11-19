@@ -64,16 +64,15 @@ Grove - Ultrasonic Ranger isThe Grove - Human Presence Sensor can be used to det
 To integrate with Human Presence Sensor we need connect to port I2C on Grove Expansion Card.   
 
 <img src="https://user-images.githubusercontent.com/17214533/69137311-18ef0300-0aef-11ea-9fa0-9b3f85656d66.png" width="500" alt="accessibility text"> 
-Threre are 4 fields to detect human presence. In the output, 0 means no detection, 1 means detected.
-
+There are 4 fields to detect human presence. In the output, 0 means no detection, 1 means detected.  
 
 Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
 
 
 ## Setup
-1. Insert Grove IoT Expansion card into Mangoh Red
-1. Jump 3.3V Pin on Grove IoT Card
-1. Connect Grove Sensor to connector on Grove card
+1. Insert Grove IoT Expansion card to mangoh Yellow
+1. Jump 3.3V Pin on Grove IoT card
+1. Connect Grove sensors to connector on Grove IoT card
 
 
 
