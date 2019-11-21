@@ -78,6 +78,8 @@ To integrate with Digital Light Sensor we need connect to port I2C on Grove Expa
 <img src="https://user-images.githubusercontent.com/17214533/69299846-371a4780-0c44-11ea-8464-2a04e528cb78.png" width="500" alt="accessibility text">
 
 Lux is displayed on Octave.
+<img src="https://user-images.githubusercontent.com/17214533/69301673-a5153d80-0c49-11ea-8744-7163beed24ab.png" width="500" alt="accessibility text">
+
 
 Detail in: http://wiki.seeedstudio.com/Grove-Digital_Light_Sensor/
 
