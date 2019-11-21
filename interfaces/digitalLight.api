@@ -1,0 +1,28 @@
+//--------------------------------------------------------------------------------------------------
+/**
+ * @page c_mangoh Digital Light Sensor API
+ *
+ * The following function can be used to fetch human presence measurement:
+ *
+ * - digitalLight_Read
+ *
+ * <hr>
+ *
+ * Copyright (C) Sierra Wireless Inc.
+ *
+ * @file digitalLight.h
+ */
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Read the Lux measurement.
+ *
+ * @return LE_OK if successful.
+ */
+//--------------------------------------------------------------------------------------------------
+FUNCTION le_result_t Read
+(
+	uint16 value OUT 
+);
+

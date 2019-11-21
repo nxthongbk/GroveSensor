@@ -28,10 +28,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#ifndef Digital_Light_TSL2561_H
-#define Digital_Light_TSL2561_H
 
-#include <Arduino.h>
+#include "legato.h"
+#include "interfaces.h"
+#include "i2cUtils.h"
+
+#ifndef TSL2561_H
+#define TSL2561_H
 
 #define  TSL2561_Control  0x80
 #define  TSL2561_Timing   0x81
@@ -110,7 +113,7 @@ class TSL2561_CalculateLux
   void getLux(void);
   void init(void);
   uint8_t readRegister(int deviceAddress, int address);
-  void writeRegister(int deviceAddress, int address, uint8_t val);
+  void writeRegister(int deviceAddress, uint8_t address, uint8_t val);
  private:
   uint8_t CH0_LOW,CH0_HIGH,CH1_LOW,CH1_HIGH;
   uint16_t ch0,ch1;

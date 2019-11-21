@@ -6,7 +6,7 @@ extern:
 {
     //gasMQ9              = groveSensor.gasMQ9.gasMQ9
     //alcohol             = groveSensor.alcohol.alcohol
-    air                 = groveSensor.air.air
+    //air                 = groveSensor.air.air
     //speechRecognizer    = groveSensor.speechRecognizer.recognizer
     //ledmatrix           = groveSensor.ledmatrix.ledmatrix
     //light               = groveSensor.light.light
@@ -15,6 +15,7 @@ extern:
     //pirMotion          = groveSensor.pirMotion.pirMotion
     //i2cUtils             = groveSensor.i2cUtils.i2cUtils
     //humanPresence         = groveSensor.humanPresence.humanPresence
+    digitalLight         = groveSensor.digitalLight.digitalLight
 }
 
 
@@ -24,7 +25,7 @@ executables:
         //components/i2cUtils/i2cUtils
         //components/sensors/gasMQ9
         //components/sensors/alcohol
-        components/sensors/air
+        //components/sensors/air
         //components/sensors/speechRecognizer
         //components/sensors/RFIDReader
         //components/actuators/ledmatrix
@@ -32,6 +33,7 @@ executables:
         //components/sensors/ultraSonic
         //components/sensors/pirMotion
         //components/sensors/humanPresence
+        components/sensors/digitalLight
     )
 }
 
@@ -56,7 +58,7 @@ bindings:
     //groveSensor.gasMQ9.dhubIO -> dataHub.io
     //groveSensor.alcohol.le_adc -> modemService.le_adc
     //groveSensor.alcohol.dhubIO -> dataHub.io
-    groveSensor.air.dhubIO -> dataHub.io
+    //groveSensor.air.dhubIO -> dataHub.io
     //groveSensor.ledmatrix.io -> dataHub.io
     //groveSensor.ledmatrix.admin -> dataHub.admin
     //groveSensor.speechRecognizer.dhubIO -> dataHub.io
@@ -68,7 +70,9 @@ bindings:
     //groveSensor.pirMotion.dhubIO -> dataHub.io
     //groveSensor.pirMotion.le_gpioPin8 -> gpioService.le_gpioPin8
     //groveSensor.humanPresence.dhubIO -> dataHub.io
+    groveSensor.digitalLight.dhubIO -> dataHub.io
 }
+
 requires:
 {
     device:

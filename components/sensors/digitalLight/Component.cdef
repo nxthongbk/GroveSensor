@@ -8,7 +8,7 @@
 cxxflags:
 {
     -std=c++0x
-    -I $CURDIR/../../i2c-utils
+    -I $CURDIR/../../i2cUtils
 }
 provides:
 {
@@ -23,7 +23,6 @@ requires:
     api:
     {
         dhubIO = io.api
-        modemServices/le_adc.api
     }
 
     component:
@@ -35,7 +34,7 @@ requires:
 
 sources:
 {
-    digitalLightSensor.c
-    Digital_Light_TSL2561.cpp
+    digitalLightSensor.cpp
+    TSL2561.cpp
 }
 
