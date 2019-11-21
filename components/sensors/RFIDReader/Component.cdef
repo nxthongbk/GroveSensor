@@ -1,25 +1,25 @@
 sources:
 {
-	groveRFID.c
+    groveRFID.c
 }
 
 provides:
 {
-	api:
-	{
-		$CURDIR/../../../interfaces/RFIDReader.api
-	}
+    api:
+    {
+        $CURDIR/../../../interfaces/RFIDReader.api
+    }
 }
 
 requires:
 {
-	api:
-	{
-		dhubIO = io.api
-	}
+    api:
+    {
+        dhubIO = io.api
+    }
 
-	component:
-	{
-		periodicSensor
-	}
+    component:
+    {
+        periodicSensor
+    }
 }
