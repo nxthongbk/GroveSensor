@@ -75,8 +75,9 @@ The Grove - Digital Light Sensor is based on the I2C light-to-digital converter 
 
 To integrate with Digital Light Sensor we need connect to port I2C on Grove Expansion Card.   
 
-<img src="https://user-images.githubusercontent.com/17214533/69137311-18ef0300-0aef-11ea-9fa0-9b3f85656d66.png" width="500" alt="accessibility text"> 
-There are 4 fields to detect human presence. In the output, 0 means no detection, 1 means detected.  
+<img src="https://user-images.githubusercontent.com/17214533/69299846-371a4780-0c44-11ea-8464-2a04e528cb78.png" width="500" alt="accessibility text">
+
+In the output display lux.
 
 Detail in: http://wiki.seeedstudio.com/Grove-Digital_Light_Sensor/
 
