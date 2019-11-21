@@ -69,6 +69,19 @@ There are 4 fields to detect human presence. In the output, 0 means no detection
 Detail in: http://wiki.seeedstudio.com/Grove-Human_Presence_Sensor-AK9753/
 
 
+### Grove - Digital Light Sensor
+------------------
+The Grove - Digital Light Sensor is based on the I2C light-to-digital converter TSL2561 to transform light intensity to a digital signal. Different from traditional analog light sensor, as Grove - Light Sensor, this digital module features a selectable light spectrum range due to its dual light sensitive diodes: infrared and full spectrum.   
+
+To integrate with Digital Light Sensor we need connect to port I2C on Grove Expansion Card.   
+
+<img src="https://user-images.githubusercontent.com/17214533/69137311-18ef0300-0aef-11ea-9fa0-9b3f85656d66.png" width="500" alt="accessibility text"> 
+There are 4 fields to detect human presence. In the output, 0 means no detection, 1 means detected.  
+
+Detail in: http://wiki.seeedstudio.com/Grove-Digital_Light_Sensor/
+
+
+
 ## Setup
 1. Insert Grove IoT Expansion card to mangoh Yellow
 1. Jump 3.3V Pin on Grove IoT card
