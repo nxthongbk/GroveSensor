@@ -106,7 +106,7 @@ Lux is displayed on Octave.
 
 
 ## How To Run
+1. Copy `GroveSensorToCloud` app to `mangOH/apps/`
+1. Add line `$CURDIR/apps/GroveSensorToCloud/groveSensor` to `yellow.sdef`
+1. Run `make yellow_MODULE` where `MODULE` is `wp77xx` or `wp76xx`
 
-1. Copy `GroveSensorToCloud` app to mangOH/apps.
-1. Add line `$CURDIR/apps/GroveSensorToCloud/groveSensor` to yellow.sdef.
-1. Make yellow.sdef.
