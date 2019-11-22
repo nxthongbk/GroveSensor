@@ -30,6 +30,27 @@
 static const char *air_sensor_i2c_bus = "/dev/i2c-5";
 static uint8_t buf[29];
 
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Read all of the registers from the device into the buf variable
+ */
+//--------------------------------------------------------------------------------------------------
+le_result_t air_ReadDevice
+(
+    void
+)
+{
+    LE_INFO("Start Reading Sensor");
+    int res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
+    if (res != NULL)
+    {
+        return LE_FAULT;
+    }
+
+    return LE_OK;
+}
+
 //--------------------------------------------------------------------------------------------------
 /**
  * Read Air measurement in Industrial Condition
@@ -44,31 +65,15 @@ le_result_t air_ReadIndustrialPM1_0
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
-    int pmBufNum = 2;
-    LE_INFO("Start Reading Sensor");
-
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-
-    if (res != 0)
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
     {
-        return LE_FAULT;
+        return readRes;
     }
 
-    if (sizeof(buf) != 29)
-    {
-        return LE_FAULT;
-    }
-
-    if (NULL == buf)
-    {
-        return LE_FAULT;
-    }
-
+    const int pmBufNum = 2;
     *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
 
-    sleep(5);
     return LE_OK;
 }
 
@@ -86,27 +91,15 @@ le_result_t air_ReadIndustrialPM2_5
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
-    int pmBufNum = 3;
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
+    {
+        return readRes;
+    }
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != 0)
-    {
-        return LE_FAULT;
-    }
-    if (NULL == buf)
-    {
-        return LE_FAULT;
-    }
-    for (int i = 1; i < 8; i++)
-    {
-        if (i == 3)
-        {
-            *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-        }
-    }
-    sleep(5);
+    int pmBufNum = 3;
+    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
+
     return LE_OK;
 }
 
@@ -124,22 +117,15 @@ le_result_t air_ReadIndustrialPM10
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
-    int pmBufNum = 4;
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != 0)
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
     {
-        return LE_FAULT;
-    }
-    if (NULL == buf)
-    {
-        return LE_FAULT;
+        return readRes;
     }
 
+    int pmBufNum = 4;
     *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
 
-    sleep(5);
     return LE_OK;
 }
 
@@ -157,23 +143,15 @@ le_result_t air_ReadEnvironmentPM1_0
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
+    {
+        return readRes;
+    }
+
     int pmBufNum = 5;
-
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != 0)
-    {
-        return LE_FAULT;
-    }
-    if (NULL == buf)
-    {
-        return LE_FAULT;
-    }
-
     *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
 
-    sleep(5);
     return LE_OK;
 }
 
@@ -191,23 +169,15 @@ le_result_t air_ReadEnvironmentPM2_5
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
+    {
+        return readRes;
+    }
+
     int pmBufNum = 6;
-
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != 0)
-    {
-        return LE_FAULT;
-    }
-    if (NULL == buf)
-    {
-        return LE_FAULT;
-    }
-
     *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
 
-    sleep(5);
     return LE_OK;
 }
 
@@ -225,23 +195,15 @@ le_result_t air_ReadEnvironmentPM10
     uint16_t *value
 )
 {
-    *value = 0;
-    int res = 0;
+    le_result_t readRes = air_ReadDevice();
+    if (readRes != LE_OK)
+    {
+        return readRes;
+    }
+
     int pmBufNum = 7;
-
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != 0)
-    {
-        return LE_FAULT;
-    }
-    if (NULL == buf)
-    {
-        return LE_FAULT;
-    }
-
     *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
 
-    sleep(5);
     return LE_OK;
 }
 
