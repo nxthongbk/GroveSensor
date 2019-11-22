@@ -30,6 +30,8 @@
 static const char *air_sensor_i2c_bus = "/dev/i2c-5";
 static uint8_t buf[29];
 
+#define HM3301_UART_DISABLE_CMD 0x88
+
 // NOTE: LSB follows the MSB
 #define DATA_STANDARD_PARTICULATE_PM1_0_MSB                 5
 #define DATA_STANDARD_PARTICULATE_PM2_5_MSB                 7
@@ -256,13 +258,16 @@ le_result_t air_ReadAtmosphericEnvironmentPM10
 
 COMPONENT_INIT
 {
+    LE_FATAL_IF(
+       i2cSendByte(air_sensor_i2c_bus, AIR_I2C_ADDR, HM3301_UART_DISABLE_CMD) != 0,
+       "Failed to disable UART communication");
     for (int i = 0; i < NUM_ARRAY_MEMBERS(Measurements); i++)
     {
         psensor_Create(
-                Measurements[i].dhubResource,
-                DHUBIO_DATA_TYPE_NUMERIC,
-                "ug/m3",
-                SampleHM3301Generic,
-                (void *)&Measurements[i]);
+            Measurements[i].dhubResource,
+            DHUBIO_DATA_TYPE_NUMERIC,
+            "ug/m3",
+            SampleHM3301Generic,
+            (void *)&Measurements[i]);
     }
 }
