@@ -27,9 +27,8 @@
 #include "i2cUtils.h"
 
 #define AIR_I2C_ADDR        0x40
-char air_sensor_i2c_bus[256] = "/dev/i2c-5";
-
-uint8_t buf[29] = {0,};
+static const char *air_sensor_i2c_bus = "/dev/i2c-5";
+static uint8_t buf[29];
 
 //--------------------------------------------------------------------------------------------------
 /**
