@@ -30,7 +30,6 @@
 char air_sensor_i2c_bus[256] = "/dev/i2c-5";
 
 uint8_t buf[29] = {0,};
-size_t buf_len = sizeof(buf);
 
 //--------------------------------------------------------------------------------------------------
 /**
@@ -51,14 +50,14 @@ le_result_t air_ReadIndustrialPM1_0
     int pmBufNum = 2;
     LE_INFO("Start Reading Sensor");
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
 
     if (res != 0)
     {
         return LE_FAULT;
     }
 
-    if (buf_len != 29)
+    if (sizeof(buf) != 29)
     {
         return LE_FAULT;
     }
@@ -92,7 +91,7 @@ le_result_t air_ReadIndustrialPM2_5
     int res = 0;
     int pmBufNum = 3;
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
     if (res != 0)
     {
         return LE_FAULT;
@@ -129,7 +128,7 @@ le_result_t air_ReadIndustrialPM10
     *value = 0;
     int res = 0;
     int pmBufNum = 4;
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
     if (res != 0)
     {
         return LE_FAULT;
@@ -163,7 +162,7 @@ le_result_t air_ReadEnvironmentPM1_0
     int res = 0;
     int pmBufNum = 5;
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
     if (res != 0)
     {
         return LE_FAULT;
@@ -197,7 +196,7 @@ le_result_t air_ReadEnvironmentPM2_5
     int res = 0;
     int pmBufNum = 6;
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
     if (res != 0)
     {
         return LE_FAULT;
@@ -231,7 +230,7 @@ le_result_t air_ReadEnvironmentPM10
     int res = 0;
     int pmBufNum = 7;
 
-    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, buf_len);
+    res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
     if (res != 0)
     {
         return LE_FAULT;
