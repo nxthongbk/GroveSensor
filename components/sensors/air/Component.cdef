@@ -1,7 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow Alcohol
- * sensor interface component.
+ * Component definition file for the mangOH Yellow air sensor component.
  */
 //--------------------------------------------------------------------------------------------------
 cflags:

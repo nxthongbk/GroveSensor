@@ -30,25 +30,125 @@
 static const char *air_sensor_i2c_bus = "/dev/i2c-5";
 static uint8_t buf[29];
 
+// NOTE: LSB follows the MSB
+#define DATA_STANDARD_PARTICULATE_PM1_0_MSB                 5
+#define DATA_STANDARD_PARTICULATE_PM2_5_MSB                 7
+#define DATA_STANDARD_PARTICULATE_PM10_MSB                  9
+#define DATA_ATMOSPHERIC_ENV_PARTICULATE_PM1_0_MSB         11
+#define DATA_ATMOSPHERIC_ENV_PARTICULATE_PM2_5_MSB         13
+#define DATA_ATMOSPHERIC_ENV_PARTICULATE_PM10_MSB          15
+
+enum HM3301MeasurementType
+{
+    MEAS_T_STANDARD_PARICULATE_PM1_0,
+    MEAS_T_STANDARD_PARICULATE_PM2_5,
+    MEAS_T_STANDARD_PARICULATE_PM10,
+    MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM1_0,
+    MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM2_5,
+    MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM10,
+};
+
+static const struct HM3301Measurement
+{
+    const char *name;
+    const char *dhubResource;
+    size_t msbOffset;
+} Measurements[] = {
+    [MEAS_T_STANDARD_PARICULATE_PM1_0] = {
+        "Standard Particulate PM1.0",
+        "standardParticulatePM1_0",
+        DATA_STANDARD_PARTICULATE_PM1_0_MSB,
+    },
+    [MEAS_T_STANDARD_PARICULATE_PM2_5] = {
+        "Standard Particulate PM2.5",
+        "standardParticulatePM2_5",
+        DATA_STANDARD_PARTICULATE_PM2_5_MSB,
+    },
+    [MEAS_T_STANDARD_PARICULATE_PM10] = {
+        "Standard Particulate PM10",
+        "standardParticulatePM10",
+        DATA_STANDARD_PARTICULATE_PM10_MSB,
+    },
+    [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM1_0] = {
+        "Atmospheric Environment Particulate PM1.0",
+        "atmosphericEnvironmentParticulatePM1_0",
+        DATA_STANDARD_PARTICULATE_PM1_0_MSB,
+    },
+    [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM2_5] = {
+        "Atmospheric Environment Particulate PM2.5",
+        "atmosphericEnvironmentParticulatePM2_5",
+        DATA_STANDARD_PARTICULATE_PM2_5_MSB,
+    },
+    [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM10] = {
+        "Atmospheric Environment Particulate PM10",
+        "atmosphericEnvironmentParticulatePM10",
+        DATA_STANDARD_PARTICULATE_PM10_MSB,
+    },
+};
+
 
 //--------------------------------------------------------------------------------------------------
 /**
  * Read all of the registers from the device into the buf variable
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadDevice
+static le_result_t ReadAllHM3301Data
 (
     void
 )
 {
     LE_INFO("Start Reading Sensor");
     int res = i2cReceiveBytes(air_sensor_i2c_bus, AIR_I2C_ADDR, buf, sizeof(buf));
-    if (res != NULL)
+    if (res != 0)
     {
         return LE_FAULT;
     }
 
     return LE_OK;
+}
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Read a single measurement from the HM3301
+ */
+//--------------------------------------------------------------------------------------------------
+static le_result_t ReadHM3301Generic
+(
+    const struct HM3301Measurement *measurement, ///< specifier of measurement to read
+    uint16_t *sample  ///< the value that is read
+)
+{
+    le_result_t res = ReadAllHM3301Data();
+    if (res != LE_OK)
+    {
+        return res;
+    }
+
+    *sample = (buf[measurement->msbOffset] << 8) | (buf[measurement->msbOffset + 1] << 0);
+    return res;
+}
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * Read a single measurement from the HM3301 and push the measurement into the data hub
+ */
+//--------------------------------------------------------------------------------------------------
+static void SampleHM3301Generic
+(
+    psensor_Ref_t ref, ///< psensor instance reference
+    void *context  ///< expected to be set to the measurement to be sampled
+)
+{
+    const struct HM3301Measurement *measurement = context;
+    uint16_t sample;
+    le_result_t res = ReadHM3301Generic(measurement, &sample);
+    if (res != LE_OK)
+    {
+        LE_ERROR("Failed to read %s value (%s).", measurement->name, LE_RESULT_TXT(res));
+        return;
+    }
+
+    psensor_PushNumeric(ref, 0, sample);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -60,21 +160,12 @@ le_result_t air_ReadDevice
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadIndustrialPM1_0
+le_result_t air_ReadStandardPM1_0
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM1.0 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    const int pmBufNum = 2;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_STANDARD_PARICULATE_PM1_0], value);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -86,21 +177,12 @@ le_result_t air_ReadIndustrialPM1_0
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadIndustrialPM2_5
+le_result_t air_ReadStandardPM2_5
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM2.5 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    int pmBufNum = 3;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_STANDARD_PARICULATE_PM2_5], value);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -112,21 +194,12 @@ le_result_t air_ReadIndustrialPM2_5
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadIndustrialPM10
+le_result_t air_ReadStandardPM10
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM10 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    int pmBufNum = 4;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_STANDARD_PARICULATE_PM10], value);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -138,21 +211,12 @@ le_result_t air_ReadIndustrialPM10
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadEnvironmentPM1_0
+le_result_t air_ReadAtmosphericEnvironmentPM1_0
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM1.0 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    int pmBufNum = 5;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM1_0], value);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -164,21 +228,12 @@ le_result_t air_ReadEnvironmentPM1_0
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadEnvironmentPM2_5
+le_result_t air_ReadAtmosphericEnvironmentPM2_5
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM2.5 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    int pmBufNum = 6;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM2_5], value);
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -190,101 +245,24 @@ le_result_t air_ReadEnvironmentPM2_5
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-le_result_t air_ReadEnvironmentPM10
+le_result_t air_ReadAtmosphericEnvironmentPM10
 (
-    uint16_t *value
+    uint16_t *value  ///< ug/m3 of PM2.5 particulate
 )
 {
-    le_result_t readRes = air_ReadDevice();
-    if (readRes != LE_OK)
-    {
-        return readRes;
-    }
-
-    int pmBufNum = 7;
-    *value = (uint16_t)buf[pmBufNum * 2] << 8 | (buf[pmBufNum * 2 + 1]);
-
-    return LE_OK;
+    return ReadHM3301Generic(&Measurements[MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM10], value);
 }
 
-static void SampleAirIndustrialPM1_0
-(
-    psensor_Ref_t ref,
-    void *context
-)
-{
-    uint16_t sample;
-
-    le_result_t result = air_ReadIndustrialPM1_0(&sample);
-
-    if (result == LE_OK)
-    {
-        psensor_PushNumeric(ref, 0 /* now */, sample);
-    }
-    else
-    {
-        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
-    }
-}
-
-static void SampleAirIndustrialPM2_5
-(
-    psensor_Ref_t ref,
-    void *context
-)
-{
-    uint16_t sample;
-
-    le_result_t result = air_ReadIndustrialPM2_5(&sample);
-
-    if (result == LE_OK)
-    {
-        psensor_PushNumeric(ref, 0 /* now */, sample);
-    }
-    else
-    {
-        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
-    }
-}
-
-static void SampleAirIndustrialPM10
-(
-    psensor_Ref_t ref,
-    void *context
-)
-{
-    uint16_t sample;
-
-    le_result_t result = air_ReadIndustrialPM10(&sample);
-
-    if (result == LE_OK)
-    {
-        psensor_PushNumeric(ref, 0 /* now */, sample);
-    }
-    else
-    {
-        LE_ERROR("Failed to read sensor (%s).", LE_RESULT_TXT(result));
-    }
-}
 
 COMPONENT_INIT
 {
-    psensor_Create(
-        "airIndustrialPM1_0",
-        DHUBIO_DATA_TYPE_NUMERIC,
-        "ug/m3",
-        SampleAirIndustrialPM1_0,
-        NULL);
-    psensor_Create(
-        "airIndustrialPM2_5",
-        DHUBIO_DATA_TYPE_NUMERIC,
-        "ug/m3",
-        SampleAirIndustrialPM2_5,
-        NULL);
-    psensor_Create(
-        "airIndustrialPM10",
-        DHUBIO_DATA_TYPE_NUMERIC,
-        "ug/m3",
-        SampleAirIndustrialPM10,
-        NULL);
+    for (int i = 0; i < NUM_ARRAY_MEMBERS(Measurements); i++)
+    {
+        psensor_Create(
+                Measurements[i].dhubResource,
+                DHUBIO_DATA_TYPE_NUMERIC,
+                "ug/m3",
+                SampleHM3301Generic,
+                (void *)&Measurements[i]);
+    }
 }
