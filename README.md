@@ -64,10 +64,10 @@ To integrate with Grove-125KHz RFID Reader we need connect to port UART on Grove
 ### [Grove - Ultrasonic Ranger](http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
 ------------------
 Grove - Ultrasonic Ranger is a non-contact distance measurement module which works at 40KHz. When we
-provide a pulse trigger signal with more than 10uS through singal pin, the Grove_Ultrasonic_Ranger
+provide a pulse trigger signal with more than 10uS through singal pin, the Grove\_Ultrasonic\_Ranger
 will issue 8 cycles of 40kHz cycle level and detect the echo. The pulse width of the echo signal is
 proportional to the measured distance. Here is the formula: Distance = echo signal high time * Sound
-speed (340M/S)/2. Grove_Ultrasonic_Ranger's trig and echo singal share 1 SIG pin.
+speed (340M/S)/2. Grove\_Ultrasonic\_Ranger's trig and echo singal share 1 SIG pin.
 
 To integrate with Speech Recognizer we need connect to port D5 on Grove Expansion Card.
 
