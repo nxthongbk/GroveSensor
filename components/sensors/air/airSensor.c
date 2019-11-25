@@ -73,17 +73,17 @@ static const struct HM3301Measurement
     },
     [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM1_0] = {
         "Atmospheric Environment Particulate PM1.0",
-        "atmosphericEnvironmentParticulatePM1_0",
+        "atmosphericParticulatePM1_0",
         DATA_STANDARD_PARTICULATE_PM1_0_MSB,
     },
     [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM2_5] = {
         "Atmospheric Environment Particulate PM2.5",
-        "atmosphericEnvironmentParticulatePM2_5",
+        "atmosphericParticulatePM2_5",
         DATA_STANDARD_PARTICULATE_PM2_5_MSB,
     },
     [MEAS_T_ATMOSPHERIC_ENV_PARICULATE_PM10] = {
         "Atmospheric Environment Particulate PM10",
-        "atmosphericEnvironmentParticulatePM10",
+        "atmosphericParticulatePM10",
         DATA_STANDARD_PARTICULATE_PM10_MSB,
     },
 };
