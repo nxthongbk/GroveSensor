@@ -24,7 +24,7 @@ To integrate with Alcohol Sensor (HM3301) we need connect to port A0 on Grove Io
 The Grove - Laser PM2.5 Sensor (HM3301) is a new generation of laser dust detection sensor, which is
 used for continuous and real-time detection of dust in the air.
 
-To integrate with Laser PM2.5 Sensor (HM3301) we need connect to port A0 on Grove IoT Expansion
+To integrate with Laser PM2.5 Sensor (HM3301) we need connect to port I2C on Grove IoT Expansion
 Card.
 
 
