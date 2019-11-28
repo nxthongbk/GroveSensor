@@ -60,7 +60,7 @@ COMPONENT_INIT
 {
     LE_FATAL_IF(
         D5_SetInput(D5_ACTIVE_HIGH) != LE_OK,
-        "Failed to setup Digital as default input high");
+        "Failed to setup Digital Port as default input high");
 
     psensor_Create("collision", DHUBIO_DATA_TYPE_NUMERIC, "", SampleCollision, NULL);
 }
