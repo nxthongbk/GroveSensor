@@ -22,7 +22,7 @@
 #include "heartRateSensor.h"
 #include "i2cUtils.h"
 
-#define HEART_RATE_I2C_ADDR        0x50
+#define HEART_RATE_I2C_ADDR 0x50
 static const char *heart_rate_sensor_i2c_bus = "/dev/i2c-5";
 static uint8_t buf[1];
 
@@ -32,7 +32,7 @@ static uint8_t buf[1];
  */
 //--------------------------------------------------------------------------------------------------
 le_result_t heartRate_Read(
-    uint8_t *value ///< lux
+    uint8_t *value ///< times
 )
 {
     int res = i2cReceiveBytes(heart_rate_sensor_i2c_bus, HEART_RATE_I2C_ADDR, buf, 1);
@@ -71,5 +71,5 @@ static void SampleHeartRate(
 
 COMPONENT_INIT
 {
-    psensor_Create("heart_rate", DHUBIO_DATA_TYPE_NUMERIC, "", SampleHeartRate, NULL);
+    psensor_Create("heart_rate", DHUBIO_DATA_TYPE_NUMERIC, "times", SampleHeartRate, NULL);
 }

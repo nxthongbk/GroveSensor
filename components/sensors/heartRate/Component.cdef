@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow air sensor component.
+ * Component definition file for the mangOH Yellow heart rate sensor component.
  */
 //--------------------------------------------------------------------------------------------------
 cflags:
@@ -26,7 +26,7 @@ requires:
     component:
     {
         periodicSensor
-        $CURDIR/../../i2cUtils
+        i2cUtils
     }
 }
 
