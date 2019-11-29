@@ -98,6 +98,19 @@ To integrate with Digital Light Sensor we need connect to port I2C on Grove Expa
 Lux is displayed on Octave.
 <img src="https://user-images.githubusercontent.com/17214533/69301673-a5153d80-0c49-11ea-8744-7163beed24ab.png" width="500" alt="accessibility text">
 
+### [Grove - Collision Sensor](http://wiki.seeedstudio.com/Grove-Collision_Sensor/)
+------------------
+The Grove - Collision Sensor can detect whether any collision movement or vibration happens. It will output a low pulse signal when vibration is detected.
+
+To integrate with Digital Light Sensor we need connect to port D5 on Grove Expansion Card.
+
+
+### [Grove - Heart Rate Sensor](http://wiki.seeedstudio.com/Grove-Finger-clip_Heart_Rate_Sensor/)
+------------------
+The Grove - Finger-clip Heart Rate Sensor is based on PAH8001EI-2G, a high performance and low power CMOS-process optical sensor with Green LED and DSP integrated serving as a Heart Rate Detection(HRD) sensor. This module is based on optical technology which measures the variation human blood movement in the vessel.
+
+To integrate with Digital Light Sensor we need connect to port I2C on Grove Expansion Card.
+
 
 ## Setup
 1. Insert Grove IoT Expansion card to mangoh Yellow

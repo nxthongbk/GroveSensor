@@ -1,3 +1,9 @@
+cflags:
+{
+    -I$CURDIR/../../i2cUtils
+    -I$CURDIR/../../../../DataHub/components/json
+}
+
 sources:
 {
     ledmatrix.c
@@ -7,25 +13,19 @@ provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/ledmatrix.api
+        ledmatrix.api
     }
 }
 requires:
 {
     api:
     {
-        $LEGATO_ROOT/apps/sample/dataHub/io.api
-        $LEGATO_ROOT/apps/sample/dataHub/admin.api
+        io.api
+        admin.api
     }
     component:
     {
-        $CURDIR/../../../../GroveSensorToCloud/components/i2c-utils
-        $LEGATO_ROOT/apps/sample/dataHub/components/json
+        i2cUtils
+        json
     }
-}
-
-cflags:
-{
-    -I$CURDIR/../../../../GroveSensorToCloud/components/i2c-utils
-    -I$LEGATO_ROOT/apps/sample/dataHub/components/json
 }
