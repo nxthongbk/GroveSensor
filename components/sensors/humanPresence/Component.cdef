@@ -7,7 +7,6 @@
 cxxflags:
 {
     -std=c++0x
-    -I $CURDIR/../../i2cUtils
 }
 
 provides:
