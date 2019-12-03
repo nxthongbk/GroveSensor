@@ -32,14 +32,14 @@ FUNCTION le_result_t ReadPresentField1
 FUNCTION le_result_t ReadPresentField2
 (
 	double value OUT 
-)
+);
 
 FUNCTION le_result_t ReadPresentField3
 (
 	double value OUT 
-)
+);
 
 FUNCTION le_result_t ReadPresentField4
 (
 	double value OUT 
-)
+);
