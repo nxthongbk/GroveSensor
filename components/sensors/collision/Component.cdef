@@ -7,7 +7,7 @@ provides:
 {
     api:
     {
-        collision.api
+        $CURDIR/../../../interfaces/collision.api
     }
 }
 
