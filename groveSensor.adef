@@ -13,7 +13,6 @@ extern:
     RFIDReader          = groveSensor.RFIDReader.RFIDReader
     ultraSonic          = groveSensor.ultraSonic.ultraSonic
     pirMotion           = groveSensor.pirMotion.pirMotion
-    i2cUtils            = groveSensor.i2cUtils.i2cUtils
     humanPresence       = groveSensor.humanPresence.humanPresence
     tsl2561DigitalLight = groveSensor.tsl2561DigitalLight.tsl2561DigitalLight
     collision           = groveSensor.collision.collision
@@ -25,7 +24,6 @@ extern:
 executables:
 {
     groveSensor = (
-        components/i2cUtils
         components/sensors/gasMQ9
         components/sensors/alcohol
         components/sensors/air
