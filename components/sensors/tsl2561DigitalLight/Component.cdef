@@ -12,7 +12,7 @@ provides:
 {
     api:
     {
-        tsl2561DigitalLight.api
+        $CURDIR/../../../interfaces/tsl2561DigitalLight.api
     }
 }
 

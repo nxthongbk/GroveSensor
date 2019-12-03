@@ -11,7 +11,7 @@ provides:
 {
     api:
     {
-        heartRate.api
+        $CURDIR/../../../interfaces/heartRate.api
     }
 }
 

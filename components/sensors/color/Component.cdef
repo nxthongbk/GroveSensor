@@ -12,7 +12,7 @@ provides:
 {
     api:
     {
-        color.api
+        $CURDIR/../../../interfaces/color.api
     }
 }
 
