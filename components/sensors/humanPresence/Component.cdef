@@ -21,7 +21,7 @@ requires:
 {
     api:
     {
-        dhubIO = $CURDIR/../../../../DataHub/io.api
+        dhubIO = io.api
     }
 
     component:

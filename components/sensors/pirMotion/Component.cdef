@@ -16,7 +16,7 @@ requires:
 {
     api:
     {
-        dhubIO = $CURDIR/../../../../DataHub/io.api
+        dhubIO = io.api
         le_gpioPin8 = le_gpio.api
     }
 
@@ -25,7 +25,6 @@ requires:
         periodicSensor
     }
 }
-
 
 sources:
 {

@@ -16,7 +16,7 @@ requires:
 {
     api:
     {
-        dhubIO = $CURDIR/../../../../DataHub/io.api
+        dhubIO = io.api
         modemServices/le_adc.api
     }
 
