@@ -75,6 +75,7 @@ bindings:
     groveSensor.pirMotion.le_gpioPin8 -> gpioService.le_gpioPin8
     groveSensor.humanPresence.dhubIO -> dataHub.io
     groveSensor.tsl2561DigitalLight.dhubIO -> dataHub.io
+    groveSensor.collision.dhubIO -> dataHub.io
     groveSensor.collision.D5 -> gpioService.le_gpioPin8
     groveSensor.heartRate.dhubIO -> dataHub.io
     groveSensor.color.dhubIO -> dataHub.io
