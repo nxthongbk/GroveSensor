@@ -10,6 +10,7 @@ provides:
         $CURDIR/../../../interfaces/ledmatrix.api
     }
 }
+
 requires:
 {
     api:
@@ -19,13 +20,12 @@ requires:
     }
     component:
     {
-        $CURDIR/../../../../GroveSensorToCloud/components/i2c-utils
+        $CURDIR/../../i2c-utils
         $LEGATO_ROOT/apps/sample/dataHub/components/json
     }
 }
 
 cflags:
 {
-    -I$CURDIR/../../../../GroveSensorToCloud/components/i2c-utils
     -I$LEGATO_ROOT/apps/sample/dataHub/components/json
 }

@@ -25,7 +25,7 @@ extern:
 executables:
 {
     groveSensor = (
-        components/i2cUtils/i2cUtils
+        components/i2cUtils
         components/sensors/gasMQ9
         components/sensors/alcohol
         components/sensors/air
