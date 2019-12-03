@@ -20,7 +20,7 @@ requires:
     }
     component:
     {
-        $CURDIR/../../i2c-utils
+        $CURDIR/../../i2cUtils
         $LEGATO_ROOT/apps/sample/dataHub/components/json
     }
 }
