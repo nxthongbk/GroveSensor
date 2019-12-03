@@ -25,7 +25,7 @@ requires:
     component:
     {
         periodicSensor
-        i2cUtils
+        $CURDIR/../../i2cUtils
     }
 }
 
