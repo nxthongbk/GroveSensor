@@ -17,4 +17,8 @@ requires:
     {
         dhubIO = io.api
     }
+    component:
+    {
+        periodicSensor
+    }
 }
