@@ -141,7 +141,7 @@ COMPONENT_INIT
         "Failed to read Sensor ID");
     if(data[0] != 0x44)
     {
-        LE_ERROR("Could not set sensor TCS34725 ID");
+        LE_ERROR("Could not get sensor TCS34725 ID");
     }
     
     //set integration time
