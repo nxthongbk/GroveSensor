@@ -44,7 +44,7 @@ AK9753::AK9753(uint8_t i2c_addr)
     m_addr = i2c_addr;
 }
 
-bool AK9753::initialize(void)
+bool AK9753::initialize()
 {
     softReset();
 
@@ -88,7 +88,7 @@ int AK9753::writeRegs(uint8_t *reg_data, int len)
  * getCompanyCode
  * the code is expected to be 0x48
  */
-uint8_t AK9753::getCompanyCode(void)
+uint8_t AK9753::getCompanyCode()
 {
     uint8_t data;
 
@@ -100,42 +100,42 @@ uint8_t AK9753::getCompanyCode(void)
  * getDeviceID
  * the ID is expected to be 0x13
  */
-uint8_t AK9753::getDeviceID(void)
+uint8_t AK9753::getDeviceID()
 {
     uint8_t data;
     readRegs(REG_WIA2, &data, 1);
     return (data);
 }
 
-bool AK9753::dataReady(void) /* returns ST1[0], read ST2 to clear */
+bool AK9753::dataReady() /* returns ST1[0], read ST2 to clear */
 {
     uint8_t data;
     readRegs(REG_ST1, &data, 1);
     return ((data & 0x01) == 0x01);
 }
 
-bool AK9753::dataOverRun(void)
+bool AK9753::dataOverRun()
 {
     uint8_t data;
     readRegs(REG_ST2, &data, 1);
     return ((data & 0x02) == 0x02);
 }
 
-uint8_t AK9753::getINTST(void) /** return REG_INTST */
+uint8_t AK9753::getINTST() /** return REG_INTST */
 {
     uint8_t data;
     readRegs(REG_INTST, &data, 1);
     return (data);
 }
 
-uint8_t AK9753::getST1(void)
+uint8_t AK9753::getST1()
 {
     uint8_t data;
     readRegs(REG_ST1, &data, 1);
     return (data);
 }
 
-int16_t AK9753::getRawIR1(void)
+int16_t AK9753::getRawIR1()
 {
     uint8_t data[2];
     int16_t IR;
@@ -144,7 +144,7 @@ int16_t AK9753::getRawIR1(void)
     return (IR);
 }
 
-float AK9753::getIR1(void)
+float AK9753::getIR1()
 {
     int16_t iValue;
     float fValue;
@@ -153,7 +153,7 @@ float AK9753::getIR1(void)
     return (fValue);
 }
 
-int16_t AK9753::getRawIR2(void)
+int16_t AK9753::getRawIR2()
 {
     uint8_t data[2];
     int16_t IR;
@@ -162,7 +162,7 @@ int16_t AK9753::getRawIR2(void)
     return (IR);
 }
 
-float AK9753::getIR2(void)
+float AK9753::getIR2()
 {
     int16_t iValue;
     float fValue;
@@ -171,7 +171,7 @@ float AK9753::getIR2(void)
     return (fValue);
 }
 
-int16_t AK9753::getRawIR3(void)
+int16_t AK9753::getRawIR3()
 {
     uint8_t data[2];
     int16_t IR;
@@ -180,7 +180,7 @@ int16_t AK9753::getRawIR3(void)
     return (IR);
 }
 
-float AK9753::getIR3(void)
+float AK9753::getIR3()
 {
     int16_t iValue;
     float fValue;
@@ -189,7 +189,7 @@ float AK9753::getIR3(void)
     return (fValue);
 }
 
-int16_t AK9753::getRawIR4(void)
+int16_t AK9753::getRawIR4()
 {
     uint8_t data[2];
     int16_t IR;
@@ -198,7 +198,7 @@ int16_t AK9753::getRawIR4(void)
     return (IR);
 }
 
-float AK9753::getIR4(void)
+float AK9753::getIR4()
 {
     int16_t iValue;
     float fValue;
@@ -207,7 +207,7 @@ float AK9753::getIR4(void)
     return (fValue);
 }
 
-int16_t AK9753::getRawTMP(void)
+int16_t AK9753::getRawTMP()
 {
     uint8_t data[2];
     int16_t temp;
@@ -216,7 +216,7 @@ int16_t AK9753::getRawTMP(void)
     return (temp);
 }
 
-float AK9753::getTMP(void)
+float AK9753::getTMP()
 {
     int16_t iValue;
     float temperature;
@@ -229,21 +229,21 @@ float AK9753::getTMP(void)
     return (temperature);
 }
 
-float AK9753::getTMP_F(void)
+float AK9753::getTMP_F()
 {
     float temperature = getTMP();
     temperature = temperature * 1.8 + 32.0;
     return (temperature);
 }
 
-uint8_t AK9753::getST2(void)
+uint8_t AK9753::getST2()
 {
     uint8_t data;
     readRegs(REG_ST2, &data, 1);
     return (data);
 }
 
-int16_t AK9753::getETH13H(void)
+int16_t AK9753::getETH13H()
 {
     int16_t value;
     uint8_t data[2];
@@ -252,7 +252,7 @@ int16_t AK9753::getETH13H(void)
     return (value);
 }
 
-int16_t AK9753::getETH13L(void)
+int16_t AK9753::getETH13L()
 {
     int16_t value;
     uint8_t data[2];
@@ -261,7 +261,7 @@ int16_t AK9753::getETH13L(void)
     return (value);
 }
 
-int16_t AK9753::getETH24H(void)
+int16_t AK9753::getETH24H()
 {
     int16_t value;
     uint8_t data[2];
@@ -270,7 +270,7 @@ int16_t AK9753::getETH24H(void)
     return (value);
 }
 
-int16_t AK9753::getETH24L(void)
+int16_t AK9753::getETH24L()
 {
     int16_t value;
     uint8_t data[2];
@@ -279,35 +279,35 @@ int16_t AK9753::getETH24L(void)
     return (value);
 }
 
-uint8_t AK9753::getEHYS13(void)
+uint8_t AK9753::getEHYS13()
 {
     uint8_t data;
     readRegs(REG_EHYS13, &data, 1);
     return (data);
 }
 
-uint8_t AK9753::getEHYS24(void)
+uint8_t AK9753::getEHYS24()
 {
     uint8_t data;
     readRegs(REG_EHYS24, &data, 1);
     return (data);
 }
 
-uint8_t AK9753::getEINTEN(void)
+uint8_t AK9753::getEINTEN()
 {
     uint8_t data;
     readRegs(REG_EINTEN, &data, 1);
     return (data);
 }
 
-uint8_t AK9753::getECNTL1(void)
+uint8_t AK9753::getECNTL1()
 {
     uint8_t data;
     readRegs(REG_ECNTL1, &data, 1);
     return (data);
 }
 
-uint8_t AK9753::getCNTL2(void)
+uint8_t AK9753::getCNTL2()
 {
     uint8_t data;
     readRegs(REG_CNTL2, &data, 1);
@@ -404,13 +404,13 @@ void AK9753::setECNTL1(uint8_t value)
     writeRegs(data, 2);
 }
 
-void AK9753::softReset(void)
+void AK9753::softReset()
 {
     uint8_t data[2] = {REG_CNTL2, 0xFF};
     writeRegs(data, 2);
 }
 
-void AK9753::startNextSample(void)
+void AK9753::startNextSample()
 {
     getST2();
 }

@@ -19,7 +19,7 @@ PresenceDetector detector(movementSensor,
                           sensitivity_movement,
                           detect_interval);
 
-static le_result_t setupSensor(void)
+static le_result_t setupSensor()
 {
     // Turn on sensor
     return movementSensor.initialize() ? LE_OK : LE_FAULT;
