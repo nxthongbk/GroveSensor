@@ -35,4 +35,5 @@ sources:
 {
     humanPresenceSensor.cpp
     AK9753.cpp
+    Smoother.cpp
 }
