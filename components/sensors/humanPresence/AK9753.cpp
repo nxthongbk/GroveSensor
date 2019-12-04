@@ -28,6 +28,7 @@
  */
 
 #include "AK9753.h"
+#include "AK9753_internal.h"
 
 /*Global variable */
 static const char ak9753_i2c_bus[20] = "/dev/i2c-5"; //< I2C bus
