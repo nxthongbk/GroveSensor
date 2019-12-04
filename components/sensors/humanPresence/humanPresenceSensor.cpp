@@ -154,37 +154,9 @@ static void SamplePresentField4
 
 COMPONENT_INIT
 {
-    LE_INFO("AK9753 sensor started!!!");
-
-    if (setupSensor() != LE_OK)
-    {
-        LE_INFO("Device not found. Check wiring.");
-    }
-    else
-    {
-        psensor_Create(
-            "human_present_field1",
-            DHUBIO_DATA_TYPE_NUMERIC,
-            "",
-            SamplePresentField1,
-            NULL);
-        psensor_Create(
-            "human_present_field2",
-            DHUBIO_DATA_TYPE_NUMERIC,
-            "",
-            SamplePresentField2,
-            NULL);
-        psensor_Create(
-            "human_present_field3",
-            DHUBIO_DATA_TYPE_NUMERIC,
-            "",
-            SamplePresentField3,
-            NULL);
-        psensor_Create(
-            "human_present_field4",
-            DHUBIO_DATA_TYPE_NUMERIC,
-            "",
-            SamplePresentField4,
-            NULL);
-    }
+    LE_FATAL_IF(setupSensor() != LE_OK, "Device not found. Check wiring.");
+    psensor_Create("human_present_field1", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField1, NULL);
+    psensor_Create("human_present_field2", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField2, NULL);
+    psensor_Create("human_present_field3", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField3, NULL);
+    psensor_Create("human_present_field4", DHUBIO_DATA_TYPE_NUMERIC, "", SamplePresentField4, NULL);
 }
