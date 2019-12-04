@@ -38,7 +38,7 @@
 #define REG_EINTEN     0x1B
 #define REG_ECNTL1     0x1C
 #define REG_CNTL2      0x1D
- 
+
 /* EEPROM */
 #define REG_EKEY          0x50
 #define EEPROM_ETH13H_LSB 0x51
@@ -118,7 +118,7 @@ public:
   AK9753(uint8_t i2c_addr = AK975X_DEFAULT_ADDRESS);
 
   bool initialize(void) ;
-  
+
   uint8_t getCompanyCode(void) ;
   uint8_t getDeviceID(void) ;
   bool    dataReady(void) ; /* returns ST1[0], read ST2 to clear */
@@ -146,7 +146,7 @@ public:
   uint8_t getEINTEN(void) ;
   uint8_t getECNTL1(void) ;
   uint8_t getCNTL2(void) ;
-  
+
   int16_t ETHpAtoRaw(float pA) ;
   void    setETH13H(int16_t value) ;
   void    setETH13L(int16_t value) ;
@@ -164,8 +164,8 @@ public:
    * This is an alias of getST2(), just for friendly name
    */
   void    startNextSample(void) ;
-  
- 
+
+
 private:
   uint8_t m_addr;
   int readRegs(int addr, uint8_t *data, int len);
@@ -186,9 +186,9 @@ public:
    * @param detect_interval - the interval of the presence detection, unit: millisecond
    */
   PresenceDetector(
-    AK9753 &sensor, 
-    float threshold_presence = 10, 
-    float threshold_movement = 10, 
+    AK9753 &sensor,
+    float threshold_presence = 10,
+    float threshold_movement = 10,
     int detect_interval = 30);
   ~PresenceDetector();
 
@@ -232,7 +232,7 @@ private:
   Smoother m_smoothers[NUM_SMOOTHER];
   int m_interval;
   uint32_t m_last_time;
-  
+
   bool m_presences[4];
   uint8_t m_movement;
 
