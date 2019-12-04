@@ -18,14 +18,10 @@ PresenceDetector detector(movementSensor,
                           sensitivity_movement,
                           detect_interval);
 
-le_result_t setupSensor()
+static le_result_t setupSensor(void)
 {
     // Turn on sensor
-    if (movementSensor.initialize() == false)
-    {
-        return LE_FAULT;
-    }
-    return LE_OK;
+    return movementSensor.initialize() ? LE_OK : LE_FAULT;
 }
 
 le_result_t humanPresence_ReadPresentField1
