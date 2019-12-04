@@ -4,6 +4,7 @@
 #include "humanPresenceSensor.h"
 #include "i2cUtils.h"
 #include "AK9753.h"
+#include "PresenceDetector.h"
 
 // need to adjust these sensitivities lower if you want to detect more far
 // but will introduce error detection
