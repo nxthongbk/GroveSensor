@@ -21,31 +21,13 @@
 #include "json.h"
 #include "i2cUtils.h"
 
-const char *relay_i2c_bus = "/dev/i2c-5";
 #define RELAY_CONTROL_ADDRESS 0x10
 #define RELAY_I2C_ADDR 0x11
 
-static const struct RelayControl
-{
-    const char *outlet;
-    int offset;
-} Relay[] = {
-    {
-        "outlet1",
-        1,
-    },
-    {
-        "outlet2",
-        2,
-    },
-    {
-        "outlet3",
-        4,
-    },
-    {
-        "outlet4",
-        8,
-    }};
+const char *Outlet[] = {"outlet1", "outlet2", "outlet3", "outlet4"};
+
+uint8_t relay_state = 0;
+const char *relay_i2c_bus = "/dev/i2c-5";
 
 static void json_extract_dump(le_result_t res)
 {
@@ -102,7 +84,7 @@ static void relayHandler(double timestamp,
         le_res = json_Extract(buffer,
                           IO_MAX_STRING_VALUE_LEN,
                           value,
-                          Relay[i].outlet,
+                          Outlet[i],
                           &json_data_type);
         json_extract_dump(le_res);
         if (json_data_type != JSON_TYPE_STRING)
@@ -112,12 +94,16 @@ static void relayHandler(double timestamp,
         }
         if (strcmp(buffer, "on") == 0)
         {
-            relay_state |= Relay[i].offset;
+            relay_state |= 1 << i;
         }
     }
 
     uint8_t control_relay[2]= {RELAY_CONTROL_ADDRESS, relay_state};
-    i2cSendBytes(relay_i2c_bus, RELAY_I2C_ADDR, control_relay, sizeof(control_relay));
+    int res = i2cSendBytes(relay_i2c_bus, RELAY_I2C_ADDR, control_relay, sizeof(control_relay));
+    if (res != 0)
+    {
+        LE_ERROR("Failed to set relay state");
+    }
 }
 
 COMPONENT_INIT
