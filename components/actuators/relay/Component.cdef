@@ -1,0 +1,31 @@
+//--------------------------------------------------------------------------------------------------
+/**
+ * Component definition file for the mangOH Yellow using the 4-Channel SPDT relay
+ */
+//--------------------------------------------------------------------------------------------------
+cflags:
+{
+    -std=c99
+    -I$CURDIR/../../..DataHub/components/json
+}
+
+requires:
+{
+     api:
+    {
+        io.api
+        admin.api
+    }
+    component:
+    {
+        json
+        $CURDIR/../../i2cUtils
+    }
+
+}
+
+sources:
+{
+    relay.c
+}
+
