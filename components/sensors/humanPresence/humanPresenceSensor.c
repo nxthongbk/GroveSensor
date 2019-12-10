@@ -36,8 +36,6 @@ uint8_t REG_CNTL2[2] = {0x1D, 0xFF};
 uint8_t ECNTL1[2] = {0x1C, 0x2C};
 uint8_t REG_EINTEN[2] = {0x1B, 0x1F};
 
-static uint8_t buf[2];
-
 enum HumanPresenceMeasurementType
 {
     MEAS_T_HUMAN_PRESENCE_IR1,
@@ -89,19 +87,17 @@ le_result_t humanPresence_ReadGeneric(
 )
 {
     int res;
-
-    uint8_t ready[1];
-    uint8_t clean[1];
+    uint8_t buf[2];
 
     //Check data ready
-    res = i2cReceiveBytes_v2(human_presence_sensor_i2c_bus, HUMAN_PRESENCE_I2C_ADDR, REG_ST1, ready, 1);
+    res = i2cReceiveBytes_v2(human_presence_sensor_i2c_bus, HUMAN_PRESENCE_I2C_ADDR, REG_ST1, buf, 1);
     
     if (res != LE_OK)
     {
         return LE_FAULT;
     }
 
-    if ((ready[0] & 0x01) != 0x01)
+    if ((buf[0] & 0x01) != 0x01)
     {
         LE_INFO("No data ready to get");
         return LE_FAULT;
@@ -118,7 +114,7 @@ le_result_t humanPresence_ReadGeneric(
     }
 
     //Get Next Sample
-    res = i2cReceiveBytes_v2(human_presence_sensor_i2c_bus, HUMAN_PRESENCE_I2C_ADDR, REG_ST2, clean, 1);
+    res = i2cReceiveBytes_v2(human_presence_sensor_i2c_bus, HUMAN_PRESENCE_I2C_ADDR, REG_ST2, buf, 1);
     if (res != 0)
     {
         return LE_FAULT;
@@ -208,6 +204,7 @@ static void SampleHumanPresenceGeneric(
 
 COMPONENT_INIT
 {
+    uint8_t id[1];
     //Initialize
     //softReset
     LE_FATAL_IF(
@@ -215,7 +212,6 @@ COMPONENT_INIT
         "Failed to reset sensor");
 
     //Check chip ID
-    uint8_t id[1];
     i2cReceiveBytes_v2(human_presence_sensor_i2c_bus, HUMAN_PRESENCE_I2C_ADDR, REG_WIA2, id, 1);
     if (id[0] != 0x13)
     {
