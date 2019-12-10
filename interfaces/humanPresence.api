@@ -4,10 +4,10 @@
  *
  * The following function can be used to fetch human presence measurement:
  *
- * - humanPresence_ReadPresentField1
- * - humanPresence_ReadPresentField2
- * - humanPresence_ReadPresentField3
- * - humanPresence_ReadPresentField4
+ * - humanPresence_ReadIR1
+ * - humanPresence_ReadIR2
+ * - humanPresence_ReadIR3
+ * - humanPresence_ReadIR4
  *
  * <hr>
  *
@@ -24,22 +24,22 @@
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-FUNCTION le_result_t ReadPresentField1
+FUNCTION le_result_t ReadIR1
 (
-	double value OUT 
+	uint16 value OUT
 );
 
-FUNCTION le_result_t ReadPresentField2
+FUNCTION le_result_t ReadIR2
 (
-	double value OUT 
+	uint16 value OUT
 );
 
-FUNCTION le_result_t ReadPresentField3
+FUNCTION le_result_t ReadIR3
 (
-	double value OUT 
+	uint16 value OUT
 );
 
-FUNCTION le_result_t ReadPresentField4
+FUNCTION le_result_t ReadIR4
 (
-	double value OUT 
+	uint16 value OUT
 );
