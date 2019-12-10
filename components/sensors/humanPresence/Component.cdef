@@ -4,16 +4,16 @@
  * sensor interface component.
  */
 //--------------------------------------------------------------------------------------------------
-cxxflags:
+cflags:
 {
-    -std=c++0x
+    -I$CURDIR/../../i2cUtils
+    -std=c99
 }
-
 provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/humanPresence.api
+        humanPresence.api
     }
 }
 
@@ -27,14 +27,11 @@ requires:
     component:
     {
         periodicSensor
-        $CURDIR/../../i2cUtils
+        i2cUtils
     }
 }
 
 sources:
 {
-    humanPresenceSensor.cpp
-    PresenceDetector.cpp
-    Smoother.cpp
-    AK9753.cpp
+    humanPresenceSensor.c
 }
