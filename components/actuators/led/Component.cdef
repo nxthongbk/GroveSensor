@@ -1,0 +1,41 @@
+//--------------------------------------------------------------------------------------------------
+/**
+ * Component definition file for the mangOH Yellow using the buzzer
+ */
+//--------------------------------------------------------------------------------------------------
+cflags:
+{
+    -std=c99
+    -I$CURDIR/../../..DataHub/components/json
+}
+
+provides:
+{
+    api:
+    {
+        $CURDIR/../../../interfaces/led.api
+    }
+}
+
+requires:
+{
+     api:
+    {
+        io.api
+        admin.api
+        D2  = le_gpio.api
+        D3  = le_gpio.api
+        D4  = le_gpio.api
+		D5  = le_gpio.api
+    }
+    component:
+    {
+        json
+    }
+}
+
+sources:
+{
+    led.c
+}
+
