@@ -11,13 +11,12 @@ extern:
     ledmatrix           = groveSensor.ledmatrix.ledmatrix
     light               = groveSensor.light.light
     RFIDReader          = groveSensor.RFIDReader.RFIDReader
-    ultraSonic          = groveSensor.ultraSonic.ultraSonic
-    pirMotion           = groveSensor.pirMotion.pirMotion
     humanPresence       = groveSensor.humanPresence.humanPresence
     tsl2561DigitalLight = groveSensor.tsl2561DigitalLight.tsl2561DigitalLight
     collision           = groveSensor.collision.collision
     heartRate           = groveSensor.heartRate.heartRate
     color               = groveSensor.color.color
+    led                 = groveSensor.led.led
 }
 
 
@@ -31,13 +30,12 @@ executables:
         components/sensors/RFIDReader
         components/actuators/ledmatrix
         components/sensors/light
-        components/sensors/ultraSonic
-        components/sensors/pirMotion
         components/sensors/humanPresence
         components/sensors/collision
         components/sensors/heartRate
         components/sensors/color
         components/sensors/tsl2561DigitalLight
+        components/actuators/led
     )
 }
 
@@ -69,16 +67,18 @@ bindings:
     groveSensor.RFIDReader.dhubIO -> dataHub.io
     groveSensor.light.dhubIO -> dataHub.io
     groveSensor.light.le_adc -> modemService.le_adc
-    groveSensor.ultraSonic.dhubIO -> dataHub.io
-    groveSensor.ultraSonic.le_gpioPin8 -> gpioService.le_gpioPin8
-    groveSensor.pirMotion.dhubIO -> dataHub.io
-    groveSensor.pirMotion.le_gpioPin8 -> gpioService.le_gpioPin8
     groveSensor.humanPresence.dhubIO -> dataHub.io
     groveSensor.tsl2561DigitalLight.dhubIO -> dataHub.io
     groveSensor.collision.dhubIO -> dataHub.io
     groveSensor.collision.D5 -> gpioService.le_gpioPin8
     groveSensor.heartRate.dhubIO -> dataHub.io
     groveSensor.color.dhubIO -> dataHub.io
+    groveSensor.led.io -> dataHub.io
+    groveSensor.led.admin -> dataHub.admin
+    groveSensor.led.D2 -> gpioService.le_gpioPin24
+    groveSensor.led.D3 -> gpioService.le_gpioPin13
+    groveSensor.led.D4 -> gpioService.le_gpioPin7
+    groveSensor.led.D5 -> gpioService.le_gpioPin8
 }
 
 requires:
