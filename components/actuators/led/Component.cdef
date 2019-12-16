@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow using the buzzer
+ * Component definition file for the mangOH Yellow using the Led socket
  */
 //--------------------------------------------------------------------------------------------------
 cflags:
