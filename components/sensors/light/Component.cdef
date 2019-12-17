@@ -1,8 +1,6 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * Component definition file for the mangOH Yellow Analog light Sensor
- * http://wiki.seeedstudio.com/Grove-Light_Sensor/
- * sensor interface component.
+ * Component definition file for the mangOH Yellow light sensor component.
  */
 //--------------------------------------------------------------------------------------------------
 provides:
@@ -27,9 +25,7 @@ requires:
     }
 }
 
-
 sources:
 {
     lightSensor.c
 }
-

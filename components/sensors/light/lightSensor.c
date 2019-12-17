@@ -2,9 +2,16 @@
 /**
  * Implementation of the mangOH Yellow Light sensor interface.
  *
- * Provides the gas API services and plugs into the Legato Data Hub.
+ * Provides the Light API services and plugs into the Legato Data Hub.
  *
  * Copyright (C) Sierra Wireless Inc.
+ */
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+/**
+ * The output signal is analog value, the brighter the light is, the larger the value.
+ * For more detail refer to: http://wiki.seeedstudio.com/Grove-Light_Sensor/
  */
 //--------------------------------------------------------------------------------------------------
 #include "legato.h"
@@ -21,7 +28,6 @@ const char lightSensorAdc[] = "EXT_ADC0";
  * @return LE_OK if successful.
  */
 //--------------------------------------------------------------------------------------------------
-
 le_result_t light_Read(double *light_value)
 {
     int32_t valueMv;
@@ -37,7 +43,6 @@ le_result_t light_Read(double *light_value)
     
     return LE_OK;
 }
-
 
 static void SampleLight
 (
@@ -59,10 +64,7 @@ static void SampleLight
     }
 }
 
-
 COMPONENT_INIT
 {
     psensor_Create("light", DHUBIO_DATA_TYPE_NUMERIC, "", SampleLight, NULL);
 }
-
-
