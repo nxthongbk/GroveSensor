@@ -2,7 +2,7 @@
 /**
  * Implementation of the mangOH Red Alcohol sensor interface.
  *
- * Provides the gas API services and plugs into the Legato Data Hub.
+ * Provides the Alcohol API services and plugs into the Legato Data Hub.
  *
  * Copyright (C) Sierra Wireless Inc.
  */
@@ -47,7 +47,6 @@ le_result_t alcohol_Read(double *alcoholRs)
     return LE_OK;
 }
 
-
 static void SampleAlcohol
 (
     psensor_Ref_t ref,
@@ -73,5 +72,3 @@ COMPONENT_INIT
 {
     psensor_Create("alcohol", DHUBIO_DATA_TYPE_NUMERIC, "", SampleAlcohol, NULL);
 }
-
-
