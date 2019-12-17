@@ -87,5 +87,6 @@ requires:
     {
         // replace these devices based on your module
         [rw]    /dev/i2c-5  /dev/
+        [rw]	/dev/ttyHS0	/dev/
     }
 }
