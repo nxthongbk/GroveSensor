@@ -18,6 +18,8 @@ void signal_handler_IO(int status);
 struct sigaction saio;
 struct termios oldtio, newtio;
 
+int serial_fd;
+
 int open_uart(char *dev) {
 	int     fd;
 
@@ -142,17 +144,12 @@ void signal_handler_IO(int status)
 	data_available = true;
 }
 
-void RFIDReader_getID
-(
-    char* cmd_buffer,
-        ///< [OUT]
-    size_t cmd_bufferSize
-        ///< [IN]
-);
-
-// please disable periodic sensor sample if you want to use this function manually
 void RFIDReader_getID(char* cmd_buffer, size_t cmd_bufferSize)
 {
+	if (data_available) {
+ 		read_uart(serial_fd);
+	}
+	
 	if (is_fetched) {
 		cmd_buffer[0] = 0;
 	} else {
@@ -172,7 +169,7 @@ void periodicSample(
 	psensor_Ref_t ref,
 	void *context
 	)
-{
+{	
 	char cmd[64];
 	RFIDReader_getID(cmd, 63);
 	if (strlen(cmd) > 0) {
@@ -184,21 +181,7 @@ COMPONENT_INIT
 {
 	LE_INFO("Grove 125KHz RFID reader start");
 
-	int serial_fd;	
 	serial_fd = open_uart("/dev/ttyHS0");
 
 	psensor_Create("RFID125KHz", DHUBIO_DATA_TYPE_STRING, "", periodicSample, NULL);
-
-	while(1)
-	{
-		if (data_available) {
-			read_uart(serial_fd);
-		} else {
-			usleep(1000);
-		}
-	}
-
-	// restore old serial configuration
-	tcsetattr (serial_fd, TCSANOW, &oldtio);
-	close(serial_fd);
 }
