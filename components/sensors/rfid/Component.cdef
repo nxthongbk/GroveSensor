@@ -1,0 +1,23 @@
+sources:
+{
+    rfid.c
+}
+
+provides:
+{
+    api:
+    {
+        $CURDIR/../../../interfaces/rfid.api
+    }
+}
+
+requires:
+{
+    api:
+    {    
+        io.api
+        
+    }
+
+   
+}
