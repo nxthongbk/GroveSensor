@@ -8,7 +8,6 @@
 
 struct sigaction saio;
 struct termios oldtio, newtio;
-
 static char RFID_buffer[64];
 
 static void SerialPortHandler(int fd, short events)
@@ -29,41 +28,47 @@ static void SerialPortHandler(int fd, short events)
             LE_ERROR("Read RFID Error");
         }
 
-        if (read_buffer[i] == 0x2)
+        for (i = 0; i < bytes_read; i++)
         {
-            // start byte
-            start_byte_index = i;
-            if (stop_byte_index != -1)
+            if (read_buffer[i] == 0x2)
             {
-                is_valid_id = false;
-                start_byte_index = -1;
-                stop_byte_index = -1;
+                // start byte
+                start_byte_index = i;
+                if (stop_byte_index != -1)
+                {
+                    is_valid_id = false;
+                    start_byte_index = -1;
+                    stop_byte_index = -1;
+                }
+            }
+            else if (read_buffer[i] == 0x3)
+            {
+                // stop byte
+                stop_byte_index = i;
+                if (start_byte_index >= 0)
+                {
+                    is_valid_id = true;
+                    break;
+                }
+                else
+                {
+                    is_valid_id = false;
+                    start_byte_index = -1;
+                    stop_byte_index = -1;
+                }
             }
         }
-        else if (read_buffer[i] == 0x3)
-        {
-            // stop byte
-            stop_byte_index = i;
-            if (start_byte_index >= 0)
-            {
-                is_valid_id = true;
-            }
-            else
-            {
-                is_valid_id = false;
-                start_byte_index = -1;
-                stop_byte_index = -1;
-            }
-        }
+
         if (is_valid_id)
         {
             memcpy(RFID_buffer,
                    &read_buffer[start_byte_index + 1],
                    stop_byte_index - start_byte_index - 1);
             RFID_buffer[stop_byte_index - start_byte_index] = 0;
-        }
 
-        io_PushString("rfid", 0, RFID_buffer);
+            LE_INFO(RFID_buffer);
+            io_PushString("rfid", 0, RFID_buffer);
+        }
     }
 
     if ((events & POLLERR) || (events & POLLHUP) || (events & POLLRDHUP)) // Error or hang-up?
@@ -72,15 +77,29 @@ static void SerialPortHandler(int fd, short events)
     }
 }
 
+void rfid_Read(char* id, size_t id_bufferSize)
+{
+    if (id_bufferSize <= strlen(RFID_buffer))
+    {
+        LE_ERROR("Input buffer did not have enough size");
+    }
+
+    memcpy(id,
+           RFID_buffer,
+           strlen(RFID_buffer));
+    id[strlen(RFID_buffer)] = 0;
+}
+
 COMPONENT_INIT
 {
+    // Open the serial port.
     // Block Signals that we are going to set event handlers for.
     le_sig_Block(SIGPOLL);
 
     LE_INFO("Start RFID---------------");
-    int fd = open("/dev/ttyHS0", O_RDWR | O_NONBLOCK);
+    int fd = open("/dev/ttyHS0", O_RDWR|O_NONBLOCK);
     LE_FATAL_IF(fd == -1, "open failed with errno %d (%m)", errno);
-
+    
     // saio.sa_mask = 0;
     saio.sa_flags = 0;
     saio.sa_restorer = NULL;
@@ -91,8 +110,8 @@ COMPONENT_INIT
     fcntl(fd, F_SETFL, FASYNC);
 
     // get the parameters
-    tcgetattr(fd, &oldtio);
-    tcgetattr(fd, &newtio);
+    tcgetattr (fd, &oldtio);
+    tcgetattr (fd, &newtio);
 
     // Set the baud rates to 9600...
     cfsetispeed(&newtio, B9600);
@@ -126,15 +145,16 @@ COMPONENT_INIT
 
     // Set the new newtio for the port...
     tcflush(fd, TCIFLUSH);
-    tcsetattr(fd, TCSANOW, &newtio);
+    tcsetattr (fd, TCSANOW, &newtio);
+
 
     le_fdMonitor_Create("Serial Port",
-                        fd,
+                        fd,                
                         SerialPortHandler,
-                        POLLIN);
+                        POLLIN);          
 
     LE_FATAL_IF(io_CreateInput("rfid",
-                               IO_DATA_TYPE_STRING,
-                               "string") != LE_OK,
+                                IO_DATA_TYPE_STRING,
+                                "string") != LE_OK,
                 "FAILED to create output");
 }
