@@ -66,7 +66,6 @@ static void SerialPortHandler(int fd, short events)
 
 COMPONENT_INIT
 {
-	// Open the serial port.
     // Block Signals that we are going to set event handlers for.
     le_sig_Block(SIGPOLL);
 
@@ -121,14 +120,13 @@ COMPONENT_INIT
 	tcflush(fd, TCIFLUSH);
 	tcsetattr (fd, TCSANOW, &newtio);
 
-
 	le_fdMonitor_Create("Serial Port",
-						fd,				   
+						fd,
 						SerialPortHandler,
-						POLLIN);		  
+						POLLIN);
 
 	LE_FATAL_IF(io_CreateInput("rfid",
-								IO_DATA_TYPE_STRING,
-								"string") != LE_OK,
+							   IO_DATA_TYPE_STRING,
+							   "string") != LE_OK,
 				"FAILED to create output");
 }
