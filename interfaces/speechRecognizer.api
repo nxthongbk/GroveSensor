@@ -1,16 +1,15 @@
 //--------------------------------------------------------------------------------------------------
 /**
- * @page c_mangoh_groveRecognizer Speech Recognizer API
+ * @page c_mangoh_speechRecognizer Speech Recognizer Sensor API
  *
  * The following function can be used to get the command reported by recognizer:
  *
- * - recognizer_getCmd()
+ * - speechRecognizer_Read()
  *
  * <hr>
  *
  * Copyright (C) Sierra Wireless Inc.
  *
- * @file recognizer_interface.h
  */
 //--------------------------------------------------------------------------------------------------
 
@@ -21,7 +20,7 @@
  * @return Command as string. Empty string returned for no command.
  */
 //--------------------------------------------------------------------------------------------------
-FUNCTION getCmd
+FUNCTION Read
 (
-	string cmd_buffer[32] OUT
+	string cmd[64] OUT
 );
