@@ -7,7 +7,7 @@ provides:
 {
     api:
     {
-        $CURDIR/../../../interfaces/recognizer.api
+        $CURDIR/../../../interfaces/speechRecognizer.api
     }
 }
 
@@ -15,10 +15,6 @@ requires:
 {
     api:
     {
-        dhubIO = io.api
-    }
-    component:
-    {
-        periodicSensor
+        io.api
     }
 }
