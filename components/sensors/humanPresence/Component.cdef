@@ -13,7 +13,7 @@ provides:
 {
     api:
     {
-        humanPresence.api
+        $CURDIR/../../../interfaces/humanPresence.api
     }
 }
 
@@ -27,7 +27,7 @@ requires:
     component:
     {
         periodicSensor
-        i2cUtils
+        $CURDIR/../../i2cUtils
     }
 }
 

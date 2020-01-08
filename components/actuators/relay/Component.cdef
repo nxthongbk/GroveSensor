@@ -6,26 +6,22 @@
 cflags:
 {
     -std=c99
-    -I$CURDIR/../../..DataHub/components/json
 }
 
 requires:
 {
-     api:
+    api:
     {
         io.api
-        admin.api
     }
     component:
     {
         json
         $CURDIR/../../i2cUtils
     }
-
 }
 
 sources:
 {
     relay.c
 }
-
