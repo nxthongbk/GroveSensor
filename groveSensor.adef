@@ -4,38 +4,39 @@ version: 0.0
 
 extern:
 {
-    gasMQ9              = groveSensor.gasMQ9.gasMQ9
-    alcohol             = groveSensor.alcohol.alcohol
     air                 = groveSensor.air.air
-    speechRecognizer    = groveSensor.speechRecognizer.recognizer
+    alcohol             = groveSensor.alcohol.alcohol
+    collision           = groveSensor.collision.collision
+    color               = groveSensor.color.color
+    gasMQ9              = groveSensor.gasMQ9.gasMQ9
+    heartRate           = groveSensor.heartRate.heartRate
+    humanPresence       = groveSensor.humanPresence.humanPresence
+    led                 = groveSensor.led.led
     ledmatrix           = groveSensor.ledmatrix.ledmatrix
     light               = groveSensor.light.light
-    RFIDReader          = groveSensor.RFIDReader.RFIDReader
-    humanPresence       = groveSensor.humanPresence.humanPresence
+    RFIDReader          = groveSensor.rfid.rfid
+    speechRecognizer    = groveSensor.speechRecognizer.speechRecognizer
     tsl2561DigitalLight = groveSensor.tsl2561DigitalLight.tsl2561DigitalLight
-    collision           = groveSensor.collision.collision
-    heartRate           = groveSensor.heartRate.heartRate
-    color               = groveSensor.color.color
-    led                 = groveSensor.led.led
 }
 
 
 executables:
 {
     groveSensor = (
-        components/sensors/gasMQ9
-        components/sensors/alcohol
-        components/sensors/air
-        components/sensors/speechRecognizer
-        components/sensors/RFIDReader
-        components/actuators/ledmatrix
-        components/sensors/light
-        components/sensors/humanPresence
-        components/sensors/collision
-        components/sensors/heartRate
-        components/sensors/color
-        components/sensors/tsl2561DigitalLight
         components/actuators/led
+        components/actuators/ledmatrix
+        components/actuators/relay
+        components/sensors/air
+        components/sensors/alcohol
+        components/sensors/collision
+        components/sensors/color
+        components/sensors/gasMQ9
+        components/sensors/heartRate
+        components/sensors/humanPresence
+        components/sensors/light
+        components/sensors/rfid
+        components/sensors/speechRecognizer
+        components/sensors/tsl2561DigitalLight
     )
 }
 
@@ -55,30 +56,31 @@ processes:
 
 bindings:
 {
-    groveSensor.periodicSensor.dhubIO -> dataHub.io
-    groveSensor.gasMQ9.le_adc -> modemService.le_adc
-    groveSensor.gasMQ9.dhubIO -> dataHub.io
-    groveSensor.alcohol.le_adc -> modemService.le_adc
-    groveSensor.alcohol.dhubIO -> dataHub.io
     groveSensor.air.dhubIO -> dataHub.io
-    groveSensor.ledmatrix.io -> dataHub.io
-    groveSensor.ledmatrix.admin -> dataHub.admin
-    groveSensor.speechRecognizer.dhubIO -> dataHub.io
-    groveSensor.RFIDReader.dhubIO -> dataHub.io
-    groveSensor.light.dhubIO -> dataHub.io
-    groveSensor.light.le_adc -> modemService.le_adc
-    groveSensor.humanPresence.dhubIO -> dataHub.io
-    groveSensor.tsl2561DigitalLight.dhubIO -> dataHub.io
-    groveSensor.collision.dhubIO -> dataHub.io
+    groveSensor.alcohol.dhubIO -> dataHub.io
+    groveSensor.alcohol.le_adc -> modemService.le_adc
     groveSensor.collision.D5 -> gpioService.le_gpioPin8
-    groveSensor.heartRate.dhubIO -> dataHub.io
+    groveSensor.collision.dhubIO -> dataHub.io
     groveSensor.color.dhubIO -> dataHub.io
-    groveSensor.led.io -> dataHub.io
+    groveSensor.gasMQ9.dhubIO -> dataHub.io
+    groveSensor.gasMQ9.le_adc -> modemService.le_adc
+    groveSensor.heartRate.dhubIO -> dataHub.io
+    groveSensor.humanPresence.dhubIO -> dataHub.io
     groveSensor.led.admin -> dataHub.admin
     groveSensor.led.D2 -> gpioService.le_gpioPin24
     groveSensor.led.D3 -> gpioService.le_gpioPin13
     groveSensor.led.D4 -> gpioService.le_gpioPin7
     groveSensor.led.D5 -> gpioService.le_gpioPin8
+    groveSensor.led.io -> dataHub.io
+    groveSensor.ledmatrix.admin -> dataHub.admin
+    groveSensor.ledmatrix.io -> dataHub.io
+    groveSensor.light.dhubIO -> dataHub.io
+    groveSensor.light.le_adc -> modemService.le_adc
+    groveSensor.periodicSensor.dhubIO -> dataHub.io
+    groveSensor.relay.io ->dataHub.io
+    groveSensor.rfid.io -> dataHub.io
+    groveSensor.speechRecognizer.io -> dataHub.io
+    groveSensor.tsl2561DigitalLight.dhubIO -> dataHub.io
 }
 
 requires:
