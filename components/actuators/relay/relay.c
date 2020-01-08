@@ -24,27 +24,33 @@
 #define RELAY_CONTROL_ADDRESS 0x10
 #define RELAY_I2C_ADDR 0x11
 
-const char *Outlet[] = {"outlet1", "outlet2", "outlet3", "outlet4"};
+static const char *Outlet[] = {"outlet1", "outlet2", "outlet3", "outlet4"};
 
-uint8_t relay_state = 0;
-const char *relay_i2c_bus = "/dev/i2c-5";
+static uint8_t RelayState = 0;
+static const char *relay_i2c_bus = "/dev/i2c-5";
 
 static void json_extract_dump(le_result_t res)
 {
-    if (res == LE_OK) {
+    switch (res)
+    {
+    case LE_OK:
         LE_INFO("json_Extract: successful");
-    }
-    if (res == LE_FORMAT_ERROR) {
+        break;
+    case LE_FORMAT_ERROR:
         LE_ERROR("json_Extract: there's something wrong with the input JSON string.");
-    }
-    if (res == LE_BAD_PARAMETER) {
+        break;
+    case LE_BAD_PARAMETER:
         LE_ERROR("json_Extract: there's something wrong with the extraction specification");
-    }
-    if (res == LE_NOT_FOUND) {
+        break;
+    case LE_NOT_FOUND:
         LE_ERROR("json_Extract: the thing we are trying to extract doesn't exist in the JSON input");
-    }
-    if (res == LE_OVERFLOW) {
+        break;
+    case LE_OVERFLOW:
         LE_ERROR("json_Extract: the provided result buffer isn't big enough");
+        break;
+    default:
+        LE_ERROR("json_Extract: %s", LE_RESULT_TXT(res));
+        break;
     }
 }
 
@@ -54,11 +60,12 @@ static void json_extract_dump(le_result_t res)
  */
 //--------------------------------------------------------------------------------------------------
 static void relayHandler(double timestamp,
-                       const char *LE_NONNULL value,
-                       void *contextPtr)
+                         const char *LE_NONNULL value,
+                         void *contextPtr)
 {
     char buffer[IO_MAX_STRING_VALUE_LEN];
-    uint8_t relay_state = 0x00;
+    uint8_t relayNewState = 0x00;
+    uint8_t relayMask = 0x00;
 
     le_result_t le_res;
     json_DataType_t json_data_type;
@@ -78,36 +85,62 @@ static void relayHandler(double timestamp,
         return;
     }
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < NUM_ARRAY_MEMBERS(Outlet); i++)
     {
-        memset(buffer, 0, IO_MAX_STRING_VALUE_LEN);
         le_res = json_Extract(buffer,
-                          IO_MAX_STRING_VALUE_LEN,
-                          value,
-                          Outlet[i],
-                          &json_data_type);
+                              IO_MAX_STRING_VALUE_LEN,
+                              value,
+                              Outlet[i],
+                              &json_data_type);
         json_extract_dump(le_res);
+        if (le_res != LE_OK)
+        {
+            // No value specified for this output, leave as-is
+            continue;
+        }
+
         if (json_data_type != JSON_TYPE_STRING)
         {
             LE_ERROR("WRONG data type for outlet%d", i);
             return;
         }
+
         if (strcmp(buffer, "on") == 0)
         {
-            relay_state |= 1 << i;
+            relayNewState |= 1 << i;
+            relayMask |= (1 << i);
+        }
+        else if (strcmp(buffer, "off") == 0)
+        {
+            // bit is already 0
+            relayMask |= (1 << i);
+        }
+        else
+        {
+            LE_ERROR("Unsupported value (%s) for %s", buffer, Outlet[i]);
+            return;
         }
     }
 
-    uint8_t control_relay[2]= {RELAY_CONTROL_ADDRESS, relay_state};
-    int res = i2cSendBytes(relay_i2c_bus, RELAY_I2C_ADDR, control_relay, sizeof(control_relay));
+    uint8_t toWrite = ((RelayState & (~relayMask)) | relayNewState);
+    uint8_t controlRelay[] = {RELAY_CONTROL_ADDRESS, toWrite};
+    int res = i2cSendBytes(relay_i2c_bus, RELAY_I2C_ADDR, controlRelay, sizeof(controlRelay));
     if (res != 0)
     {
         LE_ERROR("Failed to set relay state");
+    }
+    else
+    {
+        RelayState = toWrite;
     }
 }
 
 COMPONENT_INIT
 {
+    /*
+     * TODO: Is it possible to read the state of the relays from hardware? If so, it would be good
+     * to initialize RelayState here based on the hardware state.
+     */
     io_CreateOutput("relay",
                     IO_DATA_TYPE_JSON,
                     "string");
